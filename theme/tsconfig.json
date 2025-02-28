@@ -1,0 +1,22 @@
+{
+    "extends": "@vue/tsconfig/tsconfig.dom.json",
+    "compilerOptions": {
+        "composite": true,
+        "baseUrl": "./",
+        "paths": {
+            "@/*": [
+                "./*"
+            ]
+        },
+        "noEmit": true
+    },
+    "include": [
+        "index.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "docs/.vuepress/.cache",
+        "docs/.vuepress/.temp",
+        "docs/.vuepress/dist"
+    ]
+}
