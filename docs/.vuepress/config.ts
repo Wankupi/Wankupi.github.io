@@ -12,4 +12,10 @@ export default defineUserConfig({
   title: "Wankupi's Blog",
   public: path.resolve(__dirname, "../../public"),
   dest: path.resolve(__dirname, "../../dist"),
+  head: [["link", { rel: "icon", href: "/static/images/icon.png" }]],
+  locales: {
+    "/": {
+      lang: "zh-CN",
+    },
+  },
 });
