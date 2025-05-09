@@ -11,12 +11,20 @@
         "noEmit": true
     },
     "include": [
-        "index.ts"
+        "**/*.ts",
+        "**/*.vue",
+        "index.ts",
+        "eslint.config.*",
+        "vite.config.*",
+        "vitest.config.*",
+        "cypress.config.*",
+        "nightwatch.conf.*",
+        "playwright.config.*",
     ],
     "exclude": [
         "node_modules",
         "docs/.vuepress/.cache",
         "docs/.vuepress/.temp",
         "docs/.vuepress/dist"
-    ]
+    ],
 }
