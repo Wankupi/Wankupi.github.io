@@ -1,6 +1,6 @@
 import type { Theme, App, Page } from "vuepress";
 import { getDirname, path } from "vuepress/utils";
-import { get_file_create_and_modify_time } from "./file_time.ts";
+import { get_file_create_and_modify_time } from "./server/file_time.ts";
 
 const __dirname = getDirname(import.meta.url);
 const theme: Theme = {

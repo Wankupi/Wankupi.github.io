@@ -19,14 +19,29 @@ import Footer from '../components/Footer.vue';
 
 <style scoped>
 .rt-layout {
-    --top-panel-height: 3em;
-    --item-gap: 1rem;
     --text-title-color: #000;
     --card-bg-color: #fff;
+    --text-color: #000;
 }
 
 .rt-layout {
-    background: linear-gradient(to bottom, #f4f7f7, #fff);
+    position: relative;
+    height: 100vh;
+}
+
+.rt-layout::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: #eee;
+    background-image: url("/static/images/background/home-main.jpg");
 }
 
 main {
@@ -36,7 +51,7 @@ main {
     padding-top: var(--top-panel-height);
 
     display: grid;
-    grid-template-columns: auto 17em;
+    grid-template-columns: 1fr 17em;
     grid-auto-flow: dense;
     align-items: start;
 }
@@ -52,5 +67,19 @@ main>*:nth-child(2) {
 article {
     min-height: calc(100vh - var(--top-panel-height));
     padding: var(--item-gap);
+}
+</style>
+
+<style>
+a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+html {
+    --top-panel-height: 3em;
+    --item-gap: 1rem;
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--top-panel-height);
 }
 </style>

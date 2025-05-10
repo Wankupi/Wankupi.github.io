@@ -5,12 +5,13 @@ const { page } = defineProps<{
     page: Page
 }>();
 
-function raw_content_to_abstract(content: string): string {
+function get_excerpt(content: string): string {
     if (content.startsWith("---\n")) {
         content = content.substring(content.indexOf("---\n", 3) + 3);
         content = content.substring(content.indexOf("---\n", 3) + 3);
     }
-    return content.slice(0, 200);
+    content = content.substring(0, content.indexOf("<!-- more -->"));
+    return content;
 }
 
 function date_to_string(date: Date | string): string {
@@ -38,7 +39,7 @@ function get_type(page: Page): string {
             <span class="art-read" v-if="page.data.read_count">{{ page.data.read_count }}</span>
             <span class="art-comment" v-if="page.data.comment_count">{{ page.data.comment_count }}</span>
         </header>
-        <div class="art-outline">{{ page.frontmatter["abstract"] || raw_content_to_abstract(page.content) }}</div>
+        <div class="art-outline">{{ page.frontmatter["excerpt"] || get_excerpt(page.content) }}</div>
         <a :href="page.path" target="_self" class="center button">阅读全文&gt;&gt;</a>
     </div>
 </template>
@@ -57,7 +58,6 @@ function get_type(page: Page): string {
 }
 
 .card:hover {
-    /* background-color: #f4f7f7; */
     box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.5);
 }
 
@@ -76,6 +76,11 @@ a {
     line-height: 2em;
     padding: 0 1.5em;
     transition-duration: 0.3s;
+}
+
+.button:hover {
+    background-color: #dadada;
+    color: var(--text-title-color);
 }
 
 .center {

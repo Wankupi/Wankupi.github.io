@@ -2,7 +2,7 @@
     <header class="top-panel">
         <span><a href="/">Wankupi's Blog</a></span>
         <span><a href="/about" title="关于">关于</a></span>
-        <span><a href="/friends" title="友链">友链</a></span>
+        <!-- <span><a href="/friends" title="友链">友链</a></span> -->
     </header>
 </template>
 

@@ -4,22 +4,16 @@
         "composite": true,
         "baseUrl": "./",
         "paths": {
-            "@/*": [
+            "@theme-kupi/*": [
                 "./*"
-            ]
+            ],
         },
         "noEmit": true
     },
     "include": [
         "**/*.ts",
         "**/*.vue",
-        "index.ts",
-        "eslint.config.*",
-        "vite.config.*",
-        "vitest.config.*",
-        "cypress.config.*",
-        "nightwatch.conf.*",
-        "playwright.config.*",
+        "index.ts"
     ],
     "exclude": [
         "node_modules",

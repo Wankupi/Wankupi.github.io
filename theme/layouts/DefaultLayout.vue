@@ -6,9 +6,7 @@ import ArticleCard from '../components/ArticleCard.vue';
 <template>
     <BaseLayout>
         <template #article>
-            <ArticleCard>
-                <Content />
-            </ArticleCard>
+            <ArticleCard />
         </template>
     </BaseLayout>
 </template>

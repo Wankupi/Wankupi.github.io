@@ -1,8 +1,8 @@
 <template>
     <div class="card" id="article">
-        <slot></slot>
+        <Content />
     </div>
-    <div class="card" id="Comment"></div>
+    <!-- <div class="card" id="Comment"></div> -->
 </template>
 
 <style scoped>
@@ -10,12 +10,11 @@
     display: block;
     position: relative;
     max-width: 30cm;
-    box-sizing: border-box;
-    margin: 1rem;
     padding: 2em;
     background-color: var(--card-bg-color);
     box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.5);
     overflow-x: auto;
+    margin-bottom: var(--item-gap);
 }
 
 @media (max-aspect-ratio: 3/5),
@@ -28,27 +27,30 @@
 </style>
 
 <style>
-.articles a {
-    position: relative;
-    color: rgb(0, 123, 255);
+.card img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 20em;
+    /* display: block; */
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.articles a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 1px;
-    background-color: red;
-    width: 100%;
-    transform: scaleX(0.0);
-    transform-origin: center center;
-    transition-duration: 0.15s;
-    transition-timing-function: linear;
+.card#article {
+    text-indent: 2em;
 }
+</style>
 
-.articles a:hover::after {
-    transform: scaleX(1.0);
+<style lang="scss">
+.card#article {
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        text-align: center;
+        text-indent: 0;
+    }
 }
 </style>
