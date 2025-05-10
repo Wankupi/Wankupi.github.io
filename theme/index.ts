@@ -38,6 +38,9 @@ const theme: Theme = {
         }),
     };
   },
+  alias: {
+    "@": path.resolve(__dirname),
+  }
 };
 
 const my_theme = (options: App) => {

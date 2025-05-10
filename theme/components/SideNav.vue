@@ -2,7 +2,7 @@
 import ContactMe from './ContactMe.vue';
 import SideCard from './SideCard.vue';
 import { onMounted, ref } from 'vue';
-import { get_plan } from '../client/leancloud';
+import { get_plan } from '@/client/leancloud';
 
 let messages = ref<string[]>([]);
 let hitokoto = ref<string>("");
