@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BaseLayout from './BaseLayout.vue';
+import BaseLayout from './BlogBaseLayout.vue';
 import ArticleCard from '@/components/ArticleCard.vue';
 </script>
 

@@ -21,8 +21,7 @@ function date_to_string(date: Date | string): string {
 }
 
 function get_type(page: Page): string {
-    let path = page.path;
-    return path.split("/")[2];
+    return decodeURIComponent(page.path.split("/")[2]);
 }
 
 </script>
