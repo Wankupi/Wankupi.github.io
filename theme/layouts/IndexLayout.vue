@@ -19,18 +19,10 @@ const frontmatter = usePageFrontmatter<{
 <template>
     <div class="rt-wrapper">
         <div class="rt-layout">
-            <PersonInfo></PersonInfo>
+            <PersonInfo class="sticky-top"></PersonInfo>
             <div class="main">
                 <Content />
-                <ShowCard v-for="(item, index) in frontmatter.education" :key="index" :title="item.title"
-                    :detail="item.location" :time="item.date">
-                    <template #icon>
-                        <VPIcon icon="tdesign:education-filled" color="black" />
-                    </template>
-                </ShowCard>
-                <VPIcon icon="tdesign:education-filled" color="black" />
-                <!-- Last Updated on {{ (new Date(frontmatter.lastUpdated!)).toString() }} -->
-                <div style="color:gray">{{ frontmatter }}</div>
+                <div class="gray">Last Updated on {{ (new Date(frontmatter.lastUpdated!)).toString() }}</div>
             </div>
         </div>
     </div>
@@ -41,19 +33,38 @@ const frontmatter = usePageFrontmatter<{
 .rt-wrapper {
     width: 100%;
     min-height: 100vh;
-    overflow: auto;
     background-color: #f0f2f5;
+    padding: 2em;
 }
 
 .rt-layout {
     display: grid;
     grid-template-columns: 16em 1fr;
+    align-items: start;
 
-    max-width: 30cm;
-    margin: 2em;
+    max-width: 35cm;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+
+    padding: 1em;
 
     background-color: white;
     border-radius: 3em;
+
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.sticky-top {
+    position: sticky;
+    top: 0;
+    /* z-index: 1; */
+    /* padding: 1em; */
+    /* background-color: white; */
+    /* border-radius: 3em; */
 }
 
 .title {
@@ -62,11 +73,19 @@ const frontmatter = usePageFrontmatter<{
 
 .main {
     padding: 2em;
+    font-size: 1.1em;
+}
+
+.gray {
+    color: gray;
 }
 </style>
 
 <style lang="scss">
 .main {
+    h1 {
+        text-align: center;
+    }
 
     // overflow: hidden;
     h1,
@@ -84,7 +103,16 @@ const frontmatter = usePageFrontmatter<{
     }
 
     a {
-        text-decoration: none;
+        // text-decoration: none;
+    }
+
+    li {
+        margin-left: 1em;
+    }
+
+    p {
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
     }
 }
 </style>
