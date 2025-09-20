@@ -33,7 +33,7 @@ I'm enthusiastic about formal verification, architecture, and system security. I
 practical skills.
 
 - **Network Security and Privacy Protection (NSEC) Lab** SJTU, June.2024~Present
-  - Undergraduate Researcher, advised by [**Prof. Gouxing Chen**](https://donnod.github.io/)
+  - Undergraduate Researcher, advised by [**Prof. Guoxing Chen**](https://donnod.github.io/)
   - Research Topic: verifiable interrupt-based side-channel mitigation for trusted execution environment.
 
 ## Selected Projects
