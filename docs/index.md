@@ -3,12 +3,12 @@ layout: Index
 EnglishName: Kunpeng Wang
 ChineseName: 王鲲鹏
 github: Wankupi
-cv: /cv.pdf
+cv: cv.pdf
 emails: ["kunpengwang@sjtu.edu.cn", "kunpengw@mit.edu"]
 photo: "https://zhiyuan-studentrecruit.sjtu.edu.cn/images/portrait/2022/%E7%8E%8B%E9%B2%B2%E9%B9%8F_522030910092.jpg"
 location:
-  - 'D19 SJTU, Shanghai'
-  - '46 Berkshire St. Boston'
+  - '31-G786 MIT'
+  - 'D19 SJTU'
 ---
 
 

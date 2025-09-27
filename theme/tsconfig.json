@@ -12,7 +12,7 @@
     "include": [
         "**/*.ts",
         "**/*.vue",
-        "index.ts"
+        "main.ts",
     ],
     "exclude": [
         "node_modules",

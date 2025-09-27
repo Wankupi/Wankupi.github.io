@@ -4,44 +4,27 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "vuepress dev docs",
-    "build": "vuepress build docs"
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@eslint/css": "^0.7.0",
-    "@eslint/js": "^9.26.0",
-    "@eslint/markdown": "^6.4.0",
-    "@mdit/plugin-tex": "^0.21.0",
+    "@mdit/plugin-tex": "^0.22.1",
     "@types/markdown-it": "^14.1.2",
-    "@vue/tsconfig": "^0.7.0",
-    "@vuepress/bundler-vite": "2.0.0-rc.20",
-    "@vuepress/plugin-icon": "2.0.0-rc.104",
-    "@vuepress/plugin-markdown-math": "2.0.0-rc.103",
-    "@vuepress/theme-default": "2.0.0-rc.80",
-    "@vuepress/types": "^1.9.10",
-    "eslint": "^9.26.0",
-    "eslint-plugin-vue": "^10.1.0",
-    "globals": "^16.1.0",
-    "katex": "^0.16.22",
+    "@vue/tsconfig": "^0.8.1",
     "markdown-it": "^14.1.0",
-    "mathjax-full": "^3.2.2",
-    "sass-embedded": "^1.88.0",
-    "typescript": "^5.8.3",
-    "typescript-eslint": "^8.32.1",
-    "unplugin-vue-components": "^28.5.0",
-    "vue": "^3.5.13",
-    "vuepress": "2.0.0-rc.20",
-    "vuepress-plugin-typescript": "^0.3.1"
+    "theme-kupi": "link:theme",
+    "typescript": "^5.9.2",
+    "vitepress": "^1.6.4",
+    "vue": "^3.5.22",
+    "vue-router": "^4.5.1"
   },
   "pnpm": {
     "overrides": {
       "theme-kupi": "link:./theme"
     }
-  },
-  "dependencies": {
-    "theme-kupi": "link:theme"
   }
 }

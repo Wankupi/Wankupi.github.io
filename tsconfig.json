@@ -5,18 +5,18 @@
         "baseUrl": "./",
         "paths": {
             "@/*": [
-                "docs/.vuepress/*"
+                ".vitepress/*"
             ]
         },
         "noEmit": true
     },
     "include": [
-        "docs/.vuepress/**/*",
+        ".vitepress/**/*",
     ],
     "exclude": [
         "node_modules",
-        "docs/.vuepress/.cache",
-        "docs/.vuepress/.temp",
-        "docs/.vuepress/dist"
+        ".vitepress/.cache",
+        ".vitepress/.temp",
+        ".vitepress/dist"
     ]
 }

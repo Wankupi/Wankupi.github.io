@@ -5,7 +5,11 @@ node_modules/
 **/.vuepress/.cache
 # VuePress 默认构建生成的静态文件目录
 **/.vuepress/dist
+**/.vitepress/cache
 /dist/
 .cache
 .temp
 components.d.ts
+docs/Article
+public/
+.vscode/

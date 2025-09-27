@@ -1,17 +1,16 @@
 <script setup lang="ts">
 import BaseLayout from './BlogBaseLayout.vue';
-import { inject } from 'vue';
-import { all_pages_key } from '@/client/keys';
 import ArticleItemCard from '@/components/ArticleItemCard.vue';
 
-const all_pages = inject(all_pages_key)!;
+import { data } from "@/data/posts.data"
+
 
 </script>
 
 <template>
     <BaseLayout>
         <template #article>
-            <ArticleItemCard v-for="page in all_pages" :page="page" :key="page.path"></ArticleItemCard>
+            <ArticleItemCard v-for="page in data" :page="page" :key="page.url"></ArticleItemCard>
         </template>
     </BaseLayout>
 </template>
