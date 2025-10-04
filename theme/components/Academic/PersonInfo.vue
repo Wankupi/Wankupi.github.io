@@ -12,13 +12,14 @@ const frontmatter = usePageFrontmatter<{
 }>();
 
 import { Icon } from "@iconify/vue";
+import { withBase } from "vitepress";
 const icon_size = "1.5em";
 </script>
 
 <template>
   <div class="person_info">
     <div class="square border-round">
-      <img v-if="frontmatter.photo" :src="frontmatter.photo" />
+      <img v-if="frontmatter.photo" :src="withBase(frontmatter.photo)" />
     </div>
     <h2>{{ frontmatter.EnglishName }}</h2>
     <h2>{{ frontmatter.ChineseName }}</h2>

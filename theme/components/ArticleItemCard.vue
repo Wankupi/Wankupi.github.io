@@ -1,54 +1,21 @@
 <script setup lang="ts">
 import { type Page } from "@/data/posts.data";
-// import { RouterLink } from "vue-router";
-
+import ArtMeta from "./ArtMeta.vue";
+import { withBase } from "vitepress";
 const { page } = defineProps<{ page: Page }>();
-
-// function get_excerpt(content: string): string {
-//   if (content.startsWith("---\n")) {
-//     content = content.substring(content.indexOf("---\n", 3) + 3);
-//     content = content.substring(content.indexOf("---\n", 3) + 3);
-//   }
-//   content = content.substring(0, content.indexOf("<!-- more -->"));
-//   return content;
-// }
-
-// function date_to_string(date: Date | string): string {
-//   if (typeof date === "string") date = new Date(date);
-//   return date.toLocaleString();
-// }
-
-function get_type(page: Page): string {
-  return decodeURIComponent(page.url.split("/")[2]!);
-}
 </script>
 <template>
   <div class="card">
     <h3 class="art-title">
-      <RouterLink :to="page.url">{{ page.title }}</RouterLink>
+      <a :href="withBase(page.url)">{{ page.title }}</a>
     </h3>
-    <header class="art-meta">
-      <span class="art-type">{{ get_type(page) }}</span>
-      <span class="art-date">
-        {{ page.date.string }}
-      </span>
-      <!-- <span class="art-read" v-if="page.data.read_count">{{
-        page.data.read_count
-      }}</span> -->
-      <!-- <span class="art-comment" v-if="page.data.comment_count">{{
-        page.data.comment_count
-      }}</span> -->
-    </header>
-    <div class="art-outline">
-      {{ page.excerpt }}
-    </div>
-    <a :href="page.url" target="_self" class="center button"
-      >阅读全文&gt;&gt;</a
-    >
+    <ArtMeta :page="page"></ArtMeta>
+    <div class="art-outline">{{ page.excerpt }}</div>
+    <a :href="withBase(page.url)" class="center button">阅读全文&Gt;</a>
   </div>
 </template>
 
-<style lang="css" scoped>
+<style lang="css">
 .card {
   margin-bottom: var(--item-gap);
   padding: 0.5rem;
@@ -93,50 +60,10 @@ a {
   margin: 0.5em auto;
   width: fit-content;
 }
-
-.card .art-meta {
-  text-align: center;
-  color: grey;
+.center * {
+  vertical-align: middle;
 }
-
-.art-meta > * {
-  margin-left: 1em;
-}
-
-.art-meta > *:empty {
-  display: none;
-}
-
-.art-meta > *::before {
-  content: " ";
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  background-size: 100% 100%;
-  margin-right: 0.1em;
-}
-
 .art-outline {
   text-indent: 2em;
-}
-
-.art-type {
-  width: 10em;
-}
-
-.art-type::before {
-  background-image: url("/static/images/art/art-type.png");
-}
-
-.art-date::before {
-  background-image: url("/static/images/art/art-date.png");
-}
-
-.art-read::before {
-  background-image: url("/static/images/art/art-read.png");
-}
-
-.art-comment::before {
-  background-image: url("/static/images/art/art-comment.png");
 }
 </style>

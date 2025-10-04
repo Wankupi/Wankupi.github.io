@@ -15,10 +15,10 @@ footer {
     align-items: center;
     position: relative;
     width: 100%;
-    /* margin-top: 3rem; */
-    padding: 2rem 0;
     background-color: rgb(51, 51, 51);
     font-size: small;
     color: var(--text-color);
+    min-height: var(--footer-height);
+    padding: 2rem 0;
 }
 </style>

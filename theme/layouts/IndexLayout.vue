@@ -102,7 +102,8 @@ const lastUpdated_str = computed(() =>
   }
 
   a {
-    // text-decoration: none;
+    text-decoration: none;
+    color: #1890ff;
   }
 
   li {

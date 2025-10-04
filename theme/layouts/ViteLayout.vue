@@ -1,26 +1,27 @@
 <script setup>
-import { useData } from "vitepress";
-import { defineAsyncComponent } from "vue";
-import NotFound from "@/layouts/NotFound.vue";
+import { useData } from 'vitepress'
+import { defineAsyncComponent } from 'vue'
+import NotFound from '@/layouts/NotFound.vue'
 
-const { page, frontmatter } = useData();
+const { page, frontmatter } = useData()
 
-let AcademicIndex = defineAsyncComponent(() =>
-  import("@/layouts/IndexLayout.vue")
-);
-let BlogPage = defineAsyncComponent(() =>
-  import("@/layouts/DefaultLayout.vue")
-);
-let ArticleList = defineAsyncComponent(() =>
-  import("@/layouts/ArticleListLayout.vue")
-);
+let AcademicIndex = defineAsyncComponent(() => import('@/layouts/IndexLayout.vue'))
+let BlogBaseLayout = defineAsyncComponent(() => import('@/layouts/BlogBaseLayout.vue'))
+let ArticleCard = defineAsyncComponent(() => import('@/components/ArticleCard.vue'))
+let ArticleList = defineAsyncComponent(() => import('@/components/ArticleList.vue'))
 </script>
 
 <template>
   <NotFound v-if="page.value === null" />
   <AcademicIndex v-else-if="frontmatter.layout === 'Index'" />
-  <ArticleList v-else-if="frontmatter.layout === 'ArticleList'" />
-  <BlogPage v-else />
+  <template v-else>
+    <BlogBaseLayout>
+      <template #article>
+        <ArticleList v-if="frontmatter.layout === 'ArticleList'" />
+        <ArticleCard v-else />
+      </template>
+    </BlogBaseLayout>
+  </template>
 </template>
 
 <style>

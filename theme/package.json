@@ -12,6 +12,9 @@
   "type": "module",
   "devDependencies": {
     "@iconify/vue": "^5.0.0",
-    "sass": "^1.93.2"
+    "fs-extra": "^11.3.2",
+    "gray-matter": "^4.0.3",
+    "sass": "^1.93.2",
+    "vite": "^7.1.9"
   }
 }

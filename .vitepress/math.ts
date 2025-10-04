@@ -3,6 +3,7 @@ import MarkdownIt from "markdown-it";
 
 export function use_math_converter(md: MarkdownIt) {
   md.use(tex, {
+    allowInlineWithSpace: true,
     render: (content: string, displayMode: boolean) => {
       content = content
         .replace(/&/g, "&amp;")

@@ -13,12 +13,14 @@
   "license": "ISC",
   "devDependencies": {
     "@mdit/plugin-tex": "^0.22.1",
+    "@types/fs-extra": "^11.0.4",
     "@types/markdown-it": "^14.1.2",
     "@vue/tsconfig": "^0.8.1",
     "markdown-it": "^14.1.0",
     "theme-kupi": "link:theme",
     "typescript": "^5.9.2",
     "vitepress": "^1.6.4",
+    "vitepress-plugin-rss": "^0.3.2",
     "vue": "^3.5.22",
     "vue-router": "^4.5.1"
   },

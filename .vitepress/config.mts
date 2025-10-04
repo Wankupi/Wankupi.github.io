@@ -1,10 +1,22 @@
 import { defineConfig } from "vitepress";
 import { use_math_converter } from "./math";
+import { RssPlugin, type RSSOptions } from "vitepress-plugin-rss";
+
+const baseUrl = "/";
+const title = "Wankupi's Website";
+
+const rssOptions: RSSOptions = {
+  baseUrl: baseUrl,
+  title: title,
+  copyright: "",
+  icon: false,
+};
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "Wankupi's Blog",
-  description: "A VitePress Site",
+  title: title,
+  description: "",
+  base: baseUrl,
   srcDir: "docs",
   outDir: "dist",
   srcExclude: ["**/template.html"],
@@ -17,7 +29,7 @@ export default defineConfig({
         "@": "/home/wkp/website/new-blog/theme",
       },
     },
-    plugins: [],
+    // plugins: [RssPlugin(rssOptions)],
   },
   markdown: {
     math: false,
