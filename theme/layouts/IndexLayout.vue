@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import PersonInfo from "@/components/Academic/PersonInfo.vue";
-import { Content, useData } from "vitepress";
+import { useData } from "vitepress";
 import { computed } from "vue";
 
 const data = useData();
