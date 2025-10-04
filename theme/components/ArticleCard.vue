@@ -57,11 +57,10 @@ onMounted(() => {
 });
 </script>
 
-<style scoped>
+<style>
 .card {
   display: block;
   position: relative;
-  max-width: 30cm;
   padding: 2em;
   background-color: var(--card-bg-color);
   box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.5);
@@ -91,7 +90,8 @@ onMounted(() => {
   ol {
     padding-left: 1.5em;
   }
-  ul {
+  ul,
+  ol {
     text-indent: 0;
   }
   img {
@@ -102,6 +102,10 @@ onMounted(() => {
     /* display: block; */
     margin-left: auto;
     margin-right: auto;
+  }
+  a {
+    color: blue;
+    text-decoration: underline;
   }
 }
 </style>

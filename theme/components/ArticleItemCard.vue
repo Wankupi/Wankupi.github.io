@@ -5,7 +5,7 @@ import { withBase } from "vitepress";
 const { page } = defineProps<{ page: Page }>();
 </script>
 <template>
-  <div class="card">
+  <div class="list-card">
     <h3 class="art-title">
       <a :href="withBase(page.url)">{{ page.title }}</a>
     </h3>
@@ -16,7 +16,7 @@ const { page } = defineProps<{ page: Page }>();
 </template>
 
 <style lang="css">
-.card {
+.list-card {
   margin-bottom: var(--item-gap);
   padding: 0.5rem;
   transition-duration: 0.5s;
@@ -28,7 +28,7 @@ const { page } = defineProps<{ page: Page }>();
   transition-timing-function: ease-in-out;
 }
 
-.card:hover {
+.list-card:hover {
   box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.5);
 }
 

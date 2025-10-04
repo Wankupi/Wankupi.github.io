@@ -28,6 +28,7 @@ import Footer from "@/components/Footer.vue";
   position: relative;
   height: 100vh;
   overflow: auto;
+  overflow-y: scroll;
 }
 
 .rt-layout::before {
