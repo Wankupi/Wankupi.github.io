@@ -25,7 +25,7 @@ const config: SiteConfig = (global as any).VITEPRESS_CONFIG;
 if (!config) throw "undefine global";
 
 export default defineLoader({
-  watch: normalizePath(path.resolve(config.srcDir, "Articles/**/*.md")),
+  watch: normalizePath(path.resolve(config.srcDir, "Article/**/*.md")),
   async load(watchedFiles) {
     const md = await createMarkdownRenderer(
       config.srcDir,

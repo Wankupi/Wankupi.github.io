@@ -1,6 +1,7 @@
 import { defineConfig } from "vitepress";
 import { use_math_converter } from "./math";
 import { RssPlugin, type RSSOptions } from "vitepress-plugin-rss";
+import { viteStaticCopy } from "vite-plugin-static-copy";
 
 const hostname = "https://www.wankupi.top";
 const baseUrl = "";
@@ -38,7 +39,19 @@ export default defineConfig({
         "@": "/home/wkp/website/new-blog/theme"
       }
     },
-    plugins: [RssPlugin(rssOptions)]
+    plugins: [
+      RssPlugin(rssOptions),
+      viteStaticCopy({
+        targets: [
+          {
+            src: ["**/*.*", "!**/*.md", "!**/.git/**", "!public/**"],
+            dest: "",
+            overwrite: "error"
+          }
+        ],
+        structured: true
+      })
+    ]
   },
   markdown: {
     math: false,
