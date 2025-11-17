@@ -4,7 +4,7 @@ import { RssPlugin, type RSSOptions } from "vitepress-plugin-rss";
 import { viteStaticCopy } from "vite-plugin-static-copy";
 
 const hostname = "https://www.wankupi.top";
-const baseUrl = "";
+const baseUrl = "/";
 const title = "Wankupi's Website";
 
 const rssOptions: RSSOptions = {
@@ -17,7 +17,7 @@ const rssOptions: RSSOptions = {
   icon: false,
   favicon: `${hostname}${baseUrl}/favicon.ico`,
   filter(value, index, array) {
-    return value.url.startsWith("/Articles/");
+    return value.url.startsWith("/Article/");
   }
 };
 
@@ -32,7 +32,7 @@ export default defineConfig({
   lastUpdated: true,
   cleanUrls: true,
   ignoreDeadLinks: true,
-  head: [["link", { rel: "icon", href: `${baseUrl}/favicon.ico` }]],
+  head: [["link", { rel: "icon", href: `${baseUrl}favicon.ico` }]],
   vite: {
     resolve: {
       alias: {
@@ -56,6 +56,7 @@ export default defineConfig({
   markdown: {
     math: false,
     config(md) {
+      md.set({ highlight: null });
       use_math_converter(md);
     }
   }

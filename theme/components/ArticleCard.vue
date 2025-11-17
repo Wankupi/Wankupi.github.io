@@ -6,13 +6,16 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from "vue";
+import { nextTick, onMounted } from "vue";
 
 const loadMathJax = () => {
-  if ("MathJax" in window) return;
+  if ("MathJax" in window) {
+    window.MathJax.typesetPromise();
+    return;
+  }
   var MathJax = {
     startup: {
-      elements: [".art-container", "#Comment", ".catalog"],
+      elements: ["#Comment", "#article"],
       typeset: true,
       output: "chtml"
     },
@@ -51,9 +54,31 @@ const loadComment = () => {
   document.head.appendChild(script);
 };
 
-onMounted(() => {
+onMounted(async () => {
   loadMathJax();
   loadComment();
+  // import("https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/styles/default.min.css");
+  const hljs = (
+    await import(
+      "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/es/highlight.min.js"
+    )
+  ).default;
+  const cpp = (
+    await import(
+      "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/es/languages/cpp.min.js"
+    )
+  ).default;
+  hljs.registerLanguage("cpp", cpp);
+  nextTick(() => {
+    document.querySelectorAll("#article pre code").forEach((e) => {
+      hljs.highlightElement(e);
+    });
+  });
+  const style = document.createElement("link");
+  style.rel = "stylesheet";
+  style.href =
+    "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/styles/default.min.css";
+  document.head.appendChild(style);
 });
 </script>
 
@@ -106,6 +131,9 @@ onMounted(() => {
   a {
     color: blue;
     text-decoration: underline;
+  }
+  pre code {
+    text-indent: 0;
   }
 }
 </style>
