@@ -59,14 +59,10 @@ onMounted(async () => {
   loadComment();
   // import("https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/styles/default.min.css");
   const hljs = (
-    await import(
-      "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/es/highlight.min.js"
-    )
+    await import("https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/es/highlight.min.js")
   ).default;
   const cpp = (
-    await import(
-      "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/es/languages/cpp.min.js"
-    )
+    await import("https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/es/languages/cpp.min.js")
   ).default;
   hljs.registerLanguage("cpp", cpp);
   nextTick(() => {
@@ -104,6 +100,7 @@ onMounted(async () => {
 <style lang="scss">
 .card#article {
   text-indent: 2em;
+  line-height: 1.5;
   h1,
   h2,
   h3,
@@ -129,11 +126,26 @@ onMounted(async () => {
     margin-right: auto;
   }
   a {
-    color: blue;
+    color: #49b1f5;
     text-decoration: underline;
   }
-  pre code {
+  pre {
     text-indent: 0;
+    background-color: #212121;
+    color: #eff;
+    padding: 0.5em;
+    border-radius: 0.5em;
+  }
+  :not(pre) > code {
+    padding: 2px 5px;
+    background: #1b1f230d;
+    color: #f47466;
+  }
+  [class^="language-"] {
+    .lang,
+    .copy {
+      display: none;
+    }
   }
 }
 </style>
