@@ -76,6 +76,18 @@ const lastUpdated_str = computed(() =>
 .gray {
   color: gray;
 }
+
+@media (orientation: portrait) {
+  .rt-layout {
+    grid-template-columns: 1fr;
+  }
+  .rt-wrapper {
+    padding: 0.5em;
+  }
+  .main {
+    padding: 1em;
+  }
+}
 </style>
 
 <style lang="scss">

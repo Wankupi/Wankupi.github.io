@@ -53,7 +53,7 @@ main {
   margin-top: var(--top-panel-height);
 
   display: grid;
-  grid-template-columns: 1fr 17em;
+  grid-template-columns: minmax(0, 1fr) 17em;
   grid-auto-flow: dense;
   align-items: start;
   min-height: calc(100vh - var(--top-panel-height) - var(--footer-height));
@@ -65,6 +65,20 @@ main > *:nth-child(1) {
 
 main > *:nth-child(2) {
   grid-column: 1;
+}
+
+@media (orientation: portrait) {
+  main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  main > *:nth-child(1) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  main > *:nth-child(2) {
+    grid-column: 1;
+    grid-row: 2;
+  }
 }
 
 article {

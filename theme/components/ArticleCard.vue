@@ -89,9 +89,8 @@ onMounted(async () => {
   margin-bottom: var(--item-gap);
 }
 
-@media (max-aspect-ratio: 3/5), (max-width: 40em) {
+@media (orientation: portrait) {
   .card {
-    margin: 1rem 0.5rem;
     padding: 1em;
   }
 }
@@ -101,6 +100,8 @@ onMounted(async () => {
 .card#article {
   text-indent: 2em;
   line-height: 1.5;
+  word-break: break-all;
+
   h1,
   h2,
   h3,
@@ -135,6 +136,7 @@ onMounted(async () => {
     color: #eff;
     padding: 0.5em;
     border-radius: 0.5em;
+    overflow-x: auto;
   }
   :not(pre) > code {
     padding: 2px 5px;
