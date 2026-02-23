@@ -8,7 +8,7 @@ const baseUrl = "/";
 const title = "Wankupi's Website";
 
 const rssOptions: RSSOptions = {
-  baseUrl: hostname + baseUrl,
+  baseUrl: (hostname + baseUrl).replace(/\/+$/, ""), // rss has repeated '//'
   title: title,
   copyright: "",
   author: {
