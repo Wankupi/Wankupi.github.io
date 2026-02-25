@@ -73,16 +73,19 @@ main > *:nth-child(2) {
   }
   main > *:nth-child(1) {
     grid-column: 1;
-    grid-row: 1;
+    grid-row: 2;
   }
   main > *:nth-child(2) {
     grid-column: 1;
-    grid-row: 2;
+    grid-row: 1;
   }
 }
 
 article {
   padding: var(--item-gap);
+}
+article > *:last-child {
+  margin-bottom: 0;
 }
 </style>
 

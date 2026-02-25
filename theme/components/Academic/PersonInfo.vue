@@ -30,6 +30,9 @@ const icon_size = "1.5em";
       <a :href="`https://github.com/${frontmatter.github}`" target="_blank">
         <Icon icon="mdi:github" :width="icon_size" />
       </a>
+      <a href="./Article">
+        <Icon icon="mdi:book-open-variant" :width="icon_size" />
+      </a>
     </div>
     <div class="info">
       <div v-for="location in frontmatter.location" :key="location">

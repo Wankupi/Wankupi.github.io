@@ -57,23 +57,34 @@ const loadComment = () => {
 onMounted(async () => {
   loadMathJax();
   loadComment();
-  // import("https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/styles/default.min.css");
   const hljs = (
-    await import("https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/es/highlight.min.js")
+    await import("https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@latest/build/es/highlight.min.js")
   ).default;
-  const cpp = (
-    await import("https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/es/languages/cpp.min.js")
-  ).default;
-  hljs.registerLanguage("cpp", cpp);
   nextTick(() => {
-    document.querySelectorAll("#article pre code").forEach((e) => {
+    document.querySelectorAll("#article pre code").forEach(async (e) => {
+      const match = e.className.match(/language-([^\s]+)/);
+      if (match) {
+        const lang = match[1];
+        if (!hljs.getLanguage(lang)) {
+          try {
+            const langModule = (
+              await import(
+                `https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@latest/build/es/languages/${lang}.min.js`
+              )
+            ).default;
+            hljs.registerLanguage(lang, langModule);
+          } catch (err) {
+            console.warn(`Failed to load highlight.js language: ${lang}`, err);
+          }
+        }
+      }
       hljs.highlightElement(e);
     });
   });
   const style = document.createElement("link");
   style.rel = "stylesheet";
   style.href =
-    "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/styles/default.min.css";
+    "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@latest/build/styles/atom-one-dark.min.css";
   document.head.appendChild(style);
 });
 </script>
@@ -132,18 +143,23 @@ onMounted(async () => {
   }
   pre {
     text-indent: 0;
-    background-color: #212121;
-    color: #eff;
+  }
+  pre > code {
+    display: block;
     padding: 0.5em;
     border-radius: 0.5em;
     overflow-x: auto;
+  }
+  pre > code:not(.hljs) {
+    background-color: #212121;
+    color: #eff;
   }
   :not(pre) > code {
     padding: 2px 5px;
     background: #1b1f230d;
     color: #f47466;
   }
-  [class^="language-"] {
+  .vp-adaptive-theme[class^="language-"] {
     .lang,
     .copy {
       display: none;

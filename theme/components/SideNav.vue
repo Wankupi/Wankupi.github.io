@@ -65,7 +65,7 @@ nav.side {
     width: auto;
     float: none;
     position: static;
-    margin: 0 var(--item-gap);
+    margin: 0 var(--item-gap) var(--item-gap) var(--item-gap);
   }
 }
 </style>

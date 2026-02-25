@@ -6,10 +6,20 @@ import { withBase } from "vitepress";
 <template>
   <header class="top-panel">
     <a :href="withBase('/Article')">
-      <Icon icon="material-symbols:home" width="1.5em"></Icon>
       <span>Wankupi's Blog</span>
     </a>
-    <a :href="withBase('/about')" title="关于"><span>关于</span></a>
+    <a :href="withBase('/')">
+      <Icon icon="mdi:academic-cap" width="1em"></Icon>
+      <span>Homepage</span>
+    </a>
+    <a :href="withBase('/Article')">
+      <Icon icon="material-symbols:home" width="1em"></Icon>
+      <span>Wankupi's Blog</span>
+    </a>
+    <a :href="withBase('/about')">
+      <Icon icon="mdi:more-horiz" width="1em"></Icon>
+      <span>关于</span>
+    </a>
   </header>
 </template>
 
@@ -17,7 +27,6 @@ import { withBase } from "vitepress";
 .top-panel {
   display: flex;
   position: fixed;
-  justify-content: space-evenly;
   align-items: center;
   top: 0;
   left: 0;
@@ -27,9 +36,15 @@ import { withBase } from "vitepress";
   background-color: var(--card-bg-color);
   transition-duration: 0.4s;
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.5);
+  padding: 0 20px;
+  gap: 20px;
 }
 
-.top-panel > a {
+.top-panel > :first-child {
+  margin-right: auto;
+}
+
+.top-panel > * {
   display: flex;
   align-items: center;
 }

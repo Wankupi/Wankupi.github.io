@@ -15,7 +15,7 @@ footer {
     align-items: center;
     position: relative;
     width: 100%;
-    background-color: rgb(51, 51, 51);
+    backdrop-filter: blur(20px) grayscale(0.5);
     font-size: small;
     color: var(--text-color);
     min-height: var(--footer-height);
