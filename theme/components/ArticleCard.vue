@@ -112,6 +112,7 @@ onMounted(async () => {
   text-indent: 2em;
   line-height: 1.5;
   word-break: break-all;
+  tab-size: 4;
 
   h1,
   h2,
