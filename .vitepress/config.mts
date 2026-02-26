@@ -24,7 +24,7 @@ const rssOptions: RSSOptions = {
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: title,
-  description: "",
+  description: "Wankupi's Academic Homepage and Blog",
   base: baseUrl,
   srcDir: "docs",
   outDir: "dist",
