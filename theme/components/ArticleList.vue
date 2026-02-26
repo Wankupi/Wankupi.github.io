@@ -3,8 +3,8 @@ import ArticleItemCard from "@/components/ArticleItemCard.vue";
 import { data } from "@/data/posts.data";
 import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import { useRouter } from "vitepress";
-// import { useRoute, useRouter } from "vue-router";
-const pageSize = 5;
+
+const pageSize = 10;
 const router = useRouter();
 
 const current_page_num = ref<number>(1);

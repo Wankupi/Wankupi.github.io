@@ -96,4 +96,12 @@ a {
     }
   }
 }
+
+@media (orientation: portrait) {
+  .square {
+    max-width: 10em;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
 </style>

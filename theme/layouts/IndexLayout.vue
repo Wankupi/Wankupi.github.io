@@ -16,19 +16,22 @@ const lastUpdated_str = computed(() =>
       <PersonInfo class="sticky-top"></PersonInfo>
       <div class="main">
         <Content />
-        <div class="gray" v-if="lastUpdated">
-          Last Updated on {{ lastUpdated_str }}
-        </div>
+        <div class="gray" v-if="lastUpdated">Last Updated on {{ lastUpdated_str }}</div>
       </div>
     </div>
   </div>
 </template>
 
+<style>
+body {
+  --background-color: #f0f2f5;
+  background-color: var(--background-color);
+}
+</style>
 <style scoped>
 .rt-wrapper {
   width: 100%;
   min-height: 100vh;
-  background-color: #f0f2f5;
   padding: 2em;
 }
 
@@ -47,9 +50,19 @@ const lastUpdated_str = computed(() =>
   background-color: white;
   border-radius: 3em;
 
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-    Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji,
-    Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Roboto,
+    Helvetica Neue,
+    Arial,
+    Noto Sans,
+    sans-serif,
+    Apple Color Emoji,
+    Segoe UI Emoji,
+    Segoe UI Symbol,
+    Noto Color Emoji;
   white-space: normal;
   word-break: break-word;
   overflow-wrap: break-word;
@@ -87,6 +100,9 @@ const lastUpdated_str = computed(() =>
   .main {
     padding: 1em;
   }
+  .sticky-top {
+    position: static;
+  }
 }
 </style>
 
@@ -101,9 +117,10 @@ const lastUpdated_str = computed(() =>
   h2,
   h3,
   h4 {
-    font-family: "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto",
-      "Helvetica Neue", "Arial", "Noto Sans", "sans-serif", "Apple Color Emoji",
-      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family:
+      "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial",
+      "Noto Sans", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+      "Noto Color Emoji";
     color: #44566c;
     font-weight: 600;
     line-height: 1.3;
