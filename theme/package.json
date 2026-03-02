@@ -2,19 +2,56 @@
   "name": "theme-kupi",
   "version": "1.0.0",
   "description": "",
-  "main": "main.ts",
+  "main": "./dist/main.js",
+  "module": "./dist/main.js",
+  "types": "./main.ts",
+  "imports": {
+    "#posts-data": "./data/posts.data.ts"
+  },
+  "exports": {
+    ".": {
+      "types": "./main.ts",
+      "development": "./main.ts",
+      "production": "./dist/main.js",
+      "import": "./dist/main.js",
+      "default": "./dist/main.js"
+    },
+    "./config": {
+      "types": "./config.ts",
+      "import": "./config.ts"
+    },
+    "./data/posts.data": {
+      "types": "./data/posts.data.ts",
+      "import": "./data/posts.data.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "main.ts",
+    "config.ts",
+    "data/posts.data.ts"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "vite build",
+    "dev": "vite build --watch"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "type": "module",
+  "peerDependencies": {
+    "vitepress": "^1.6.4",
+    "vue": "^3.5.22"
+  },
+  "dependencies": {
+    "@iconify/vue": "^5.0.0"
+  },
   "devDependencies": {
-    "@iconify/vue": "^5.0.0",
+    "@vitejs/plugin-vue": "^6.0.1",
     "fs-extra": "^11.3.2",
     "gray-matter": "^4.0.3",
     "sass": "^1.93.2",
-    "vite": "^7.1.9"
+    "vite": "^7.1.9",
+    "vite-plugin-lib-inject-css": "^2.2.2"
   }
 }

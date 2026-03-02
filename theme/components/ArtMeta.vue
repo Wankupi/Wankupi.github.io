@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Page } from "@/data/posts.data";
+import type { Page } from "#posts-data";
 import { ref } from "vue";
 import { Icon } from "@iconify/vue";
 

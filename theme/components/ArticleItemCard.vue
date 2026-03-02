@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type Page } from "@/data/posts.data";
+import { type Page } from "#posts-data";
 import ArtMeta from "./ArtMeta.vue";
 import { withBase } from "vitepress";
 const { page } = defineProps<{ page: Page }>();

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ArticleItemCard from "@/components/ArticleItemCard.vue";
-import { data } from "@/data/posts.data";
+import { data } from "#posts-data";
 import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import { useRouter } from "vitepress";
 

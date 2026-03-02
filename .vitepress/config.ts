@@ -2,7 +2,13 @@ import { defineConfigWithTheme } from "vitepress";
 import { use_math_converter } from "./math";
 import { RssPlugin, type RSSOptions } from "vitepress-plugin-rss";
 import { viteStaticCopy } from "vite-plugin-static-copy";
+import tsconfigPaths from "vite-tsconfig-paths";
 import { type ThemeConfig } from "theme-kupi/config";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const workspaceRoot = path.resolve(__dirname, "..");
 
 const hostname = "https://www.wankupi.top";
 const baseUrl = "/";
@@ -35,12 +41,15 @@ export default defineConfigWithTheme<ThemeConfig>({
   ignoreDeadLinks: true,
   head: [["link", { rel: "icon", href: `${baseUrl}favicon.ico` }]],
   vite: {
-    resolve: {
-      alias: {
-        "@": "/home/wkp/website/new-blog/theme"
-      }
-    },
     plugins: [
+      tsconfigPaths({
+        projects: [
+          path.resolve(workspaceRoot, "tsconfig.json"),
+          path.resolve(workspaceRoot, "theme/tsconfig.json")
+        ],
+        ignoreConfigErrors: true,
+        loose: true
+      }),
       RssPlugin(rssOptions),
       viteStaticCopy({
         targets: [
