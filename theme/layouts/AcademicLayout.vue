@@ -11,30 +11,16 @@ const lastUpdated_str = computed(() =>
 </script>
 
 <template>
-  <div class="rt-wrapper">
-    <div class="rt-layout">
-      <PersonInfo class="sticky-top"></PersonInfo>
-      <div class="main">
-        <Content />
-        <div class="gray" v-if="lastUpdated">Last Updated on {{ lastUpdated_str }}</div>
-      </div>
+  <div class="rt-layout">
+    <PersonInfo class="sticky-top"></PersonInfo>
+    <div class="main">
+      <Content />
+      <div class="gray" v-if="lastUpdated">Last Updated on {{ lastUpdated_str }}</div>
     </div>
   </div>
 </template>
 
-<style>
-body {
-  --background-color: #f0f2f5;
-  background-color: var(--background-color);
-}
-</style>
 <style scoped>
-.rt-wrapper {
-  width: 100%;
-  min-height: 100vh;
-  padding: 2em;
-}
-
 .rt-layout {
   display: grid;
   grid-template-columns: 16em 1fr;
@@ -70,11 +56,7 @@ body {
 
 .sticky-top {
   position: sticky;
-  top: 0;
-  /* z-index: 1; */
-  /* padding: 1em; */
-  /* background-color: white; */
-  /* border-radius: 3em; */
+  top: var(--top-panel-height);
 }
 
 .title {

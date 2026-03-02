@@ -2,18 +2,24 @@
 import Header from "@/components/Header.vue";
 import SideNav from "@/components/SideNav.vue";
 import Footer from "@/components/Footer.vue";
+
+defineProps<{
+  is_academic: boolean;
+}>();
 </script>
 
 <template>
-  <div class="rt-layout">
+  <div class="rt-layout" :class="{ bg: !is_academic }">
     <Header></Header>
-    <main>
-      <SideNav></SideNav>
+    <main :class="{ 'max-width-30cm': !is_academic }">
       <article>
         <slot name="article"></slot>
       </article>
+      <slot name="sidebar">
+        <SideNav v-show="!is_academic"></SideNav>
+      </slot>
     </main>
-    <Footer></Footer>
+    <Footer v-show="!is_academic"></Footer>
   </div>
 </template>
 
@@ -32,8 +38,10 @@ import Footer from "@/components/Footer.vue";
   overflow: auto;
   overflow-y: scroll;
 }
-
-.rt-layout::before {
+.rt-layout:not(.bg) {
+  background-color: #eee;
+}
+.rt-layout.bg::before {
   content: "";
   position: fixed;
   top: 0;
@@ -44,29 +52,26 @@ import Footer from "@/components/Footer.vue";
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  background-color: #eee;
   background-image: url("/static/images/background/home-main.jpg");
+}
+
+.max-width-30cm {
+  max-width: 30cm;
 }
 
 main {
   margin-left: auto;
   margin-right: auto;
-  max-width: 30cm;
   margin-top: var(--top-panel-height);
-
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 17em;
+  grid-template-columns: 1fr;
   grid-auto-flow: dense;
   align-items: start;
   min-height: calc(100vh - var(--top-panel-height) - var(--footer-height));
 }
 
-main > *:nth-child(1) {
-  grid-column: 2;
-}
-
 main > *:nth-child(2) {
-  grid-column: 1;
+  grid-column: 2;
 }
 
 @media (orientation: portrait) {

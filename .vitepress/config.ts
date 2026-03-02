@@ -31,7 +31,7 @@ const rssOptions: RSSOptions = {
 // https://vitepress.dev/reference/site-config
 export default defineConfigWithTheme<ThemeConfig>({
   title: title,
-  description: "Wankupi's Academic Homepage and Blog",
+  description: "Wankupi's academic page and blogs.",
   base: baseUrl,
   srcDir: "docs",
   outDir: "dist",
@@ -72,11 +72,11 @@ export default defineConfigWithTheme<ThemeConfig>({
   },
   themeConfig: {
     nav: {
-      brand: { text: "Wankupi's Blog", link: "/Article" },
+      brand: { text: "Wankupi's Website", link: "/" },
       items: [
-        { text: "Homepage", link: "/", icon: "mdi:academic-cap" },
-        { text: "Wankupi's Blog", link: "/Article", icon: "material-symbols:home" },
-        { text: "关于", link: "/about", icon: "mdi:more-horiz" }
+        { text: "主页", link: "/", icon: "material-symbols:home" },
+        { text: "关于", link: "/about", icon: "mdi:more-horiz" },
+        { text: "Academic", link: "/about", icon: "mdi:academic-cap" },
       ]
     }
   }
