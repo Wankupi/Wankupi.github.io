@@ -22,6 +22,8 @@ import Footer from "@/components/Footer.vue";
   --text-title-color: #000;
   --card-bg-color: #fff;
   --text-color: #000;
+  --nav-hover-bg: rgba(0, 0, 0, 0.08);
+  --nav-hover-color: #333;
 }
 
 .rt-layout {

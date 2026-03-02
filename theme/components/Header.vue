@@ -49,6 +49,18 @@ import { withBase } from "vitepress";
   align-items: center;
 }
 
+.top-panel > *:not(:first-child) {
+  padding: 4px 10px;
+  border-radius: 6px;
+  transition: background-color 0.2s, color 0.2s;
+  cursor: pointer;
+}
+
+.top-panel > *:not(:first-child):hover {
+  background-color: var(--nav-hover-bg);
+  color: var(--nav-hover-color);
+}
+
 @media print {
   .top-panel {
     display: none;
