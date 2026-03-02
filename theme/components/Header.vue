@@ -1,24 +1,18 @@
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
-import { withBase } from "vitepress";
+import { withBase, useData } from "vitepress";
+
+const { theme } = useData();
 </script>
 
 <template>
   <header class="top-panel">
-    <a :href="withBase('/Article')">
-      <span>Wankupi's Blog</span>
+    <a :href="withBase(theme.nav.brand.link)">
+      <span>{{ theme.nav.brand.text }}</span>
     </a>
-    <a :href="withBase('/')">
-      <Icon icon="mdi:academic-cap" width="1em"></Icon>
-      <span>Homepage</span>
-    </a>
-    <a :href="withBase('/Article')">
-      <Icon icon="material-symbols:home" width="1em"></Icon>
-      <span>Wankupi's Blog</span>
-    </a>
-    <a :href="withBase('/about')">
-      <Icon icon="mdi:more-horiz" width="1em"></Icon>
-      <span>关于</span>
+    <a v-for="item in theme.nav.items" :key="item.link" :href="withBase(item.link)">
+      <Icon :icon="item.icon" width="1em"></Icon>
+      <span>{{ item.text }}</span>
     </a>
   </header>
 </template>

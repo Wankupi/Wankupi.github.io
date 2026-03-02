@@ -1,7 +1,8 @@
-import { defineConfig } from "vitepress";
+import { defineConfigWithTheme } from "vitepress";
 import { use_math_converter } from "./math";
 import { RssPlugin, type RSSOptions } from "vitepress-plugin-rss";
 import { viteStaticCopy } from "vite-plugin-static-copy";
+import { type ThemeConfig } from "theme-kupi/config";
 
 const hostname = "https://www.wankupi.top";
 const baseUrl = "/";
@@ -22,7 +23,7 @@ const rssOptions: RSSOptions = {
 };
 
 // https://vitepress.dev/reference/site-config
-export default defineConfig({
+export default defineConfigWithTheme<ThemeConfig>({
   title: title,
   description: "Wankupi's Academic Homepage and Blog",
   base: baseUrl,
@@ -58,6 +59,16 @@ export default defineConfig({
     config(md) {
       md.set({ highlight: null });
       use_math_converter(md);
+    }
+  },
+  themeConfig: {
+    nav: {
+      brand: { text: "Wankupi's Blog", link: "/Article" },
+      items: [
+        { text: "Homepage", link: "/", icon: "mdi:academic-cap" },
+        { text: "Wankupi's Blog", link: "/Article", icon: "material-symbols:home" },
+        { text: "关于", link: "/about", icon: "mdi:more-horiz" }
+      ]
     }
   }
 });
