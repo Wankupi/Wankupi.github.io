@@ -142,6 +142,10 @@ onMounted(async () => {
     color: #49b1f5;
     text-decoration: underline;
   }
+  a.header-anchor {
+    text-decoration: none;
+    color: inherit;
+  }
   pre {
     text-indent: 0;
   }
