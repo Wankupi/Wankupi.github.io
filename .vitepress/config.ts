@@ -11,7 +11,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const workspaceRoot = path.resolve(__dirname, "..");
 
 const hostname = "https://www.wankupi.top";
-const baseUrl = "/";
+const baseUrl = process.env["BASE_URL"] || "/";
+
 const title = "Wankupi's Website";
 
 const rssOptions: RSSOptions = {
