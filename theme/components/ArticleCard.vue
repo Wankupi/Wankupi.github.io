@@ -118,9 +118,38 @@ onMounted(async () => {
   h2,
   h3,
   h4 {
-    text-align: center;
+    font-family: var(--font-serif);
+    text-align: left;
     text-indent: 0;
+    letter-spacing: 0.01em;
   }
+
+  h1::before,
+  h2::before,
+  h3::before,
+  h4::before {
+    color: grey;
+    font-family: var(--font-mono);
+    font-size: 0.8em;
+    margin-right: 0.3rem;
+  }
+
+  h1::before {
+    content: "#";
+  }
+
+  h2::before {
+    content: "##";
+  }
+
+  h3::before {
+    content: "###";
+  }
+
+  h4::before {
+    content: "####";
+  }
+
   ul,
   ol {
     padding-left: 1.5em;

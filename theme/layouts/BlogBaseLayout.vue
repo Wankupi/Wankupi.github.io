@@ -37,6 +37,8 @@ defineProps<{
   height: 100vh;
   overflow: auto;
   overflow-y: scroll;
+  scroll-padding-top: var(--top-panel-height);
+  scroll-behavior: smooth;
 }
 .rt-layout:not(.bg) {
   background-color: #eee;
@@ -106,7 +108,8 @@ html {
   --top-panel-height: 3rem;
   --footer-height: 8rem;
   --item-gap: 1rem;
-  scroll-behavior: smooth;
-  scroll-padding-top: var(--top-panel-height);
+  --font-serif: "serif";
+  --font-mono: "monospace";
+  --font-sans: "sans-serif";
 }
 </style>
