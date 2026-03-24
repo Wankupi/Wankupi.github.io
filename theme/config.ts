@@ -1,3 +1,7 @@
+import { tex } from "@mdit/plugin-tex";
+import MarkdownIt from "markdown-it";
+import type { MarkdownOptions } from "vitepress";
+
 export interface NavItem {
   text: string;
   link: string;
@@ -12,3 +16,45 @@ export interface ThemeConfig {
   themeColor?: string;
   backgroundImage?: string;
 }
+
+export function use_math_converter(md: MarkdownIt) {
+  md.use(tex, {
+    allowInlineWithSpace: true,
+    render: (content: string, displayMode: boolean) => {
+      content = content
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+      return `<span v-pre class="math ${
+        displayMode ? "display" : "inline"
+      }">\\${"(["[Number(displayMode)]}${content}\\${")]"[Number(displayMode)]}</span>`;
+    }
+  });
+}
+
+export let markdownConfig: MarkdownOptions = {
+  math: false,
+  config(md) {
+    md.set({ highlight: null });
+    use_math_converter(md);
+  },
+  anchor: {
+    permalink(slug, opts, state, index) {
+      const linkOpen = Object.assign(new state.Token("link_open", "a", 1), {
+        attrs: [
+          ["href", `#${slug}`],
+          ["class", "header-anchor"],
+          ["aria-label", `Permalink to ${slug}`]
+        ]
+      });
+      const linkClose = new state.Token("link_close", "a", -1);
+      const children = state.tokens[index + 1]?.children;
+      if (children) {
+        children.unshift(linkOpen);
+        children.push(linkClose);
+      }
+    }
+  }
+};

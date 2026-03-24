@@ -1,16 +1,15 @@
 import { defineConfigWithTheme } from "vitepress";
-import { use_math_converter } from "./math";
 import { RssPlugin, type RSSOptions } from "vitepress-plugin-rss";
 import { viteStaticCopy } from "vite-plugin-static-copy";
 import tsconfigPaths from "vite-tsconfig-paths";
-import { type ThemeConfig } from "theme-kupi/config";
+import { type ThemeConfig, markdownConfig } from "theme-kupi/config";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const workspaceRoot = path.resolve(__dirname, "..");
 
-const hostname = "https://www.wankupi.top";
+const hostname = process.env["HOSTNAME"] || "https://www.wankupi.top";
 const baseUrl = process.env["BASE_URL"] || "/";
 
 const title = "Wankupi's Website";
@@ -65,28 +64,7 @@ export default defineConfigWithTheme<ThemeConfig>({
     ]
   },
   markdown: {
-    math: false,
-    config(md) {
-      md.set({ highlight: null });
-      use_math_converter(md);
-    },
-    anchor: {
-      permalink(slug, opts, state, index) {
-        const linkOpen = Object.assign(new state.Token("link_open", "a", 1), {
-          attrs: [
-            ["href", `#${slug}`],
-            ["class", "header-anchor"],
-            ["aria-label", `Permalink to ${slug}`]
-          ]
-        });
-        const linkClose = new state.Token("link_close", "a", -1);
-        const children = state.tokens[index + 1]?.children;
-        if (children) {
-          children.unshift(linkOpen);
-          children.push(linkClose);
-        }
-      }
-    }
+    ...markdownConfig
   },
   themeConfig: {
     backgroundImage: "/static/images/background/home-main.jpg",
