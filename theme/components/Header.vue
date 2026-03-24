@@ -51,8 +51,8 @@ const { theme } = useData();
 }
 
 .top-panel > *:not(:first-child):hover {
-  background-color: var(--nav-hover-bg);
-  color: var(--nav-hover-color);
+  background-color: var(--theme-color);
+  color: #fff;
 }
 
 @media print {

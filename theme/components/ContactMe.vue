@@ -37,6 +37,14 @@ import { Icon } from "@iconify/vue";
   justify-content: space-around;
 }
 
+.contact-me a {
+  transition: color 0.2s;
+}
+
+.contact-me a:hover {
+  color: var(--theme-color);
+}
+
 .contact-me img {
   width: 1.5rem;
   height: 1.5rem;

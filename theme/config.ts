@@ -9,4 +9,6 @@ export interface ThemeConfig {
     brand: { text: string; link: string };
     items: NavItem[];
   };
+  themeColor?: string;
+  backgroundImage?: string;
 }

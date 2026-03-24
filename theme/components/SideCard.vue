@@ -8,9 +8,10 @@
     margin-top: 1rem;
     background-color: var(--card-bg-color-opacity);
     box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.5);
-    border-right: springgreen 3px solid;
+    border-right: var(--theme-color) 3px solid;
     text-align: center;
     background-color: #ffffffaa;
+    border-radius: 0.3rem;
 }
 
 .side-card:empty {

@@ -15,7 +15,7 @@ const { page } = defineProps<{ page: Page }>();
   </div>
 </template>
 
-<style lang="css">
+<style scoped>
 .list-card {
   margin-bottom: var(--item-gap);
   padding: 0.5rem;
@@ -23,7 +23,7 @@ const { page } = defineProps<{ page: Page }>();
   border-radius: 0.3em;
   background-color: var(--card-bg-color);
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.5);
-  border-left: skyblue 3px solid;
+  border-left: var(--theme-color) 3px solid;
   transition-duration: 0.1s;
   transition-timing-function: ease-in-out;
 }
@@ -42,18 +42,6 @@ a {
   color: var(--text-title-color);
 }
 
-.button {
-  border: #777 solid 2px;
-  line-height: 2em;
-  padding: 0 1.5em;
-  transition-duration: 0.3s;
-}
-
-.button:hover {
-  background-color: #dadada;
-  color: var(--text-title-color);
-}
-
 .center {
   display: block;
   text-align: center;
@@ -65,5 +53,20 @@ a {
 }
 .art-outline {
   text-indent: 2em;
+}
+</style>
+
+<style>
+.button {
+  border: var(--theme-color) solid 2px;
+  border-radius: 0.5em;
+  line-height: 2em;
+  padding: 0 1.5em;
+  transition-duration: 0.3s;
+}
+
+.button:hover {
+  background-color: var(--theme-color);
+  color: #fff;
 }
 </style>

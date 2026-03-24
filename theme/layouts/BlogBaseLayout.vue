@@ -2,14 +2,29 @@
 import Header from "@/components/Header.vue";
 import SideNav from "@/components/SideNav.vue";
 import Footer from "@/components/Footer.vue";
+import type { ThemeConfig } from "@/config";
+import { computed } from "vue";
+import { useData, withBase } from "vitepress";
 
 defineProps<{
   is_academic: boolean;
 }>();
+
+const { theme } = useData();
+
+const layoutStyle = computed<Record<string, string>>(() => {
+  const config = (theme.value ?? {}) as ThemeConfig;
+  const backgroundImage = config.backgroundImage?.trim();
+
+  return {
+    "--theme-color": config.themeColor ?? "skyblue",
+    "--layout-bg-image": backgroundImage ? `url("${withBase(backgroundImage)}")` : "none",
+  };
+});
 </script>
 
 <template>
-  <div class="rt-layout" :class="{ bg: !is_academic }">
+  <div class="rt-layout" :class="{ bg: !is_academic }" :style="layoutStyle">
     <Header></Header>
     <main :class="{ 'max-width-30cm': !is_academic }">
       <article>
@@ -30,15 +45,12 @@ defineProps<{
   --text-color: #000;
   --nav-hover-bg: rgba(0, 0, 0, 0.08);
   --nav-hover-color: #333;
+  --theme-color: #007acc;
+  --layout-bg-image: none;
 }
 
 .rt-layout {
   position: relative;
-  height: 100vh;
-  overflow: auto;
-  overflow-y: scroll;
-  scroll-padding-top: var(--top-panel-height);
-  scroll-behavior: smooth;
 }
 .rt-layout:not(.bg) {
   background-color: #eee;
@@ -54,7 +66,7 @@ defineProps<{
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  background-image: url("/static/images/background/home-main.jpg");
+  background-image: var(--layout-bg-image);
 }
 
 .max-width-30cm {
@@ -82,11 +94,11 @@ main > *:nth-child(2) {
   }
   main > *:nth-child(1) {
     grid-column: 1;
-    grid-row: 2;
+    grid-row: 1;
   }
   main > *:nth-child(2) {
     grid-column: 1;
-    grid-row: 1;
+    grid-row: 2;
   }
 }
 
@@ -111,5 +123,7 @@ html {
   --font-serif: "serif";
   --font-mono: "monospace";
   --font-sans: "sans-serif";
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--top-panel-height);
 }
 </style>
