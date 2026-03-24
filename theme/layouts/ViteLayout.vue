@@ -14,7 +14,7 @@ let is_academic = computed(() => frontmatter.value.layout === "Academic");
 </script>
 
 <template>
-  <NotFound v-if="page.value === null" />
+  <NotFound v-if="page.isNotFound" />
   <template v-else>
     <BlogBaseLayout :is_academic="is_academic">
       <template #article>

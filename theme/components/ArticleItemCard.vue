@@ -34,6 +34,7 @@ const { page } = defineProps<{ page: Page }>();
 
 .art-title {
   font-size: 1.3em;
+  font-family: var(--font-serif);
   text-align: center;
 }
 
