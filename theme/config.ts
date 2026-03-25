@@ -14,7 +14,7 @@ export interface ThemeConfig {
     items: NavItem[];
   };
   themeColor?: string;
-  backgroundImage?: string;
+  background?: string;
 }
 
 export function use_math_converter(md: MarkdownIt) {

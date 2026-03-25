@@ -9,6 +9,7 @@ let AcademicLayout = defineAsyncComponent(() => import("@/layouts/AcademicLayout
 let BlogBaseLayout = defineAsyncComponent(() => import("@/layouts/BlogBaseLayout.vue"));
 let ArticleCard = defineAsyncComponent(() => import("@/components/ArticleCard.vue"));
 let ArticleList = defineAsyncComponent(() => import("@/components/ArticleList.vue"));
+let PersonInfo = defineAsyncComponent(() => import("@/components/Academic/PersonInfo.vue"));
 
 let is_academic = computed(() => frontmatter.value.layout === "Academic");
 </script>
@@ -21,6 +22,9 @@ let is_academic = computed(() => frontmatter.value.layout === "Academic");
         <AcademicLayout v-if="is_academic" />
         <ArticleList v-else-if="frontmatter.layout === 'ArticleList'" />
         <ArticleCard v-else />
+      </template>
+      <template v-if="is_academic" #sidebar>
+        <PersonInfo />
       </template>
     </BlogBaseLayout>
   </template>

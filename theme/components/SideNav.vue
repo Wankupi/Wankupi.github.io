@@ -53,19 +53,15 @@ onMounted(load_messages);
 <style>
 nav.side {
   position: sticky;
-  width: 16rem;
+  width: 100%;
   top: 3rem;
-  float: right;
   margin-bottom: 2rem;
-  margin-right: var(--item-gap);
 }
 
 @media (orientation: portrait) {
   nav.side {
-    width: auto;
-    float: none;
     position: static;
-    margin: 0 var(--item-gap) var(--item-gap) var(--item-gap);
+    margin: 0 0 var(--item-gap) 0;
   }
 }
 </style>

@@ -4,56 +4,55 @@ import SideNav from "@/components/SideNav.vue";
 import Footer from "@/components/Footer.vue";
 import type { ThemeConfig } from "@/config";
 import { computed } from "vue";
-import { useData, withBase } from "vitepress";
+import { useData } from "vitepress";
 
 defineProps<{
   is_academic: boolean;
 }>();
 
-const { theme } = useData();
+const { theme, frontmatter } = useData();
 
 const layoutStyle = computed<Record<string, string>>(() => {
   const config = (theme.value ?? {}) as ThemeConfig;
-  const backgroundImage = config.backgroundImage?.trim();
+  const bg = (frontmatter.value.background as string)?.trim()
+    || config.background?.trim()
+    || "#eee";
 
   return {
     "--theme-color": config.themeColor ?? "skyblue",
-    "--layout-bg-image": backgroundImage ? `url("${withBase(backgroundImage)}")` : "none",
+    "--layout-bg": bg,
   };
 });
 </script>
 
 <template>
-  <div class="rt-layout" :class="{ bg: !is_academic }" :style="layoutStyle">
+  <div class="rt-layout bg" :style="layoutStyle">
     <Header></Header>
-    <main :class="{ 'max-width-30cm': !is_academic }">
+    <main class="max-width-30cm">
       <article>
         <slot name="article"></slot>
       </article>
       <slot name="sidebar">
-        <SideNav v-show="!is_academic"></SideNav>
+        <SideNav></SideNav>
       </slot>
     </main>
-    <Footer v-show="!is_academic"></Footer>
+    <Footer></Footer>
   </div>
 </template>
 
 <style scoped>
 .rt-layout {
-  --text-title-color: #000;
-  --card-bg-color: #fff;
-  --text-color: #000;
-  --nav-hover-bg: rgba(0, 0, 0, 0.08);
-  --nav-hover-color: #333;
-  --theme-color: #007acc;
-  --layout-bg-image: none;
+  --text-title-color: var(--text-color);
+  --card-bg-color: white;
+  --text-color: black;
+  --nav-hover-bg: color-mix(in srgb, var(--text-color) 8%, transparent);
+  --nav-hover-color: var(--text-color);
+  --theme-color: skyblue;
+  --layout-bg: #eee;
 }
 
 .rt-layout {
   position: relative;
-}
-.rt-layout:not(.bg) {
-  background-color: #eee;
 }
 .rt-layout.bg::before {
   content: "";
@@ -63,10 +62,9 @@ const layoutStyle = computed<Record<string, string>>(() => {
   right: 0;
   bottom: 0;
   z-index: -1;
+  background: var(--layout-bg);
   background-size: cover;
-  background-repeat: no-repeat;
   background-position: center center;
-  background-image: var(--layout-bg-image);
 }
 
 .max-width-30cm {
@@ -78,13 +76,12 @@ main {
   margin-right: auto;
   margin-top: var(--top-panel-height);
   display: grid;
-  grid-template-columns: 1fr;
-  grid-auto-flow: dense;
+  grid-template-columns: minmax(0, 1fr) 18rem;
   align-items: start;
   min-height: calc(100vh - var(--top-panel-height) - var(--footer-height));
 }
 
-main > *:nth-child(2) {
+main > :nth-child(2) {
   grid-column: 2;
 }
 
@@ -92,13 +89,12 @@ main > *:nth-child(2) {
   main {
     grid-template-columns: minmax(0, 1fr);
   }
-  main > *:nth-child(1) {
-    grid-column: 1;
-    grid-row: 1;
-  }
-  main > *:nth-child(2) {
+
+  main > :nth-child(2) {
     grid-column: 1;
     grid-row: 2;
+    width: auto;
+    margin-right: 0;
   }
 }
 

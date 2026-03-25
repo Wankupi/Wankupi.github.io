@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { usePageFrontmatter } from "@/client/utils";
+import SideCard from "@/components/SideCard.vue";
 
 const frontmatter = usePageFrontmatter<{
-  EnglishName: string;
-  ChineseName: string;
   photo: string | null;
   cv: string;
   github: string;
@@ -18,87 +17,112 @@ const icon_size = "1.5em";
 
 <template>
   <div class="person_info">
-    <div class="square border-round">
-      <img v-if="frontmatter.photo" :src="withBase(frontmatter.photo)" />
+    <div class="photo-card" v-if="frontmatter.photo">
+      <img :src="withBase(frontmatter.photo)" />
     </div>
-    <h2>{{ frontmatter.EnglishName }}</h2>
-    <h2>{{ frontmatter.ChineseName }}</h2>
-    <div class="links">
-      <a :href="frontmatter.cv">
-        <Icon icon="academicons:cv-square" :width="icon_size" />
-      </a>
-      <a :href="`https://github.com/${frontmatter.github}`" target="_blank">
-        <Icon icon="mdi:github" :width="icon_size" />
-      </a>
-      <a href="./Article">
-        <Icon icon="mdi:book-open-variant" :width="icon_size" />
-      </a>
-    </div>
-    <div class="info">
-      <div v-for="location in frontmatter.location" :key="location">
-        <Icon icon="tdesign:location-filled" :width="icon_size" />
-        <span>{{ location }}</span>
+    <SideCard>
+      <div class="links">
+        <a :href="frontmatter.cv">
+          <Icon icon="academicons:cv" :width="icon_size" />
+        </a>
+        /
+        <a :href="`https://github.com/${frontmatter.github}`" target="_blank">
+          <Icon icon="mdi:github" :width="icon_size" />
+        </a>
       </div>
-      <div v-for="email in frontmatter.emails" :key="email">
-        <Icon icon="mdi:email-outline" :width="icon_size" />
-        <a :href="`mailto:${email}`" target="_blank">{{ email }}</a>
+    </SideCard>
+    <SideCard>
+      <div class="info">
+        <div v-for="email in frontmatter.emails" :key="email" class="info-row">
+          <Icon icon="mdi:email-outline" :width="icon_size" />
+          <a :href="`mailto:${email}`" target="_blank" class="text-item email">{{ email }}</a>
+        </div>
+        <div v-for="location in frontmatter.location" :key="location" class="info-row">
+          <Icon icon="tdesign:location-filled" :width="icon_size" />
+          <span class="text-item">{{ location }}</span>
+        </div>
       </div>
-    </div>
+    </SideCard>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .person_info {
+  position: sticky;
+  top: var(--top-panel-height);
+  display: flex;
+  flex-direction: column;
   text-align: center;
-  padding: 1em;
+  padding: 0;
+  color: var(--text-color);
+  font-family: var(--font-serif);
 }
 
 a {
-  color: black;
+  color: var(--text-color);
+  transition: color 0.2s ease;
 }
 
-.square {
-  margin: 1em;
-  aspect-ratio: 1/1;
+a:hover {
+  color: var(--theme-color);
+}
+
+.photo-card {
+  margin-top: 1rem;
+  border-radius: 0.75rem;
   overflow: hidden;
+  aspect-ratio: 1/1;
 }
 
-.border-round {
-  border-radius: 10%;
-}
-
-.square > img {
+.photo-card > img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .links {
-  text-align: center;
   display: flex;
-  column-gap: 0.5em;
+  column-gap: 0.7em;
   justify-content: center;
 }
 
 .info {
-  margin-top: 0.5em;
-  display: table;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-  div {
-    display: table-row;
-    * {
-      display: table-cell;
-      vertical-align: top;
-      text-align: left;
-    }
-    *:first-child {
-      padding-right: 0.5em;
-    }
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  align-items: stretch;
+}
+
+.info-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.3rem minmax(0, 1fr);
+  align-items: center;
+  column-gap: 0.5rem;
+  text-align: left;
+}
+
+.text-item {
+  min-width: 0;
+}
+
+.email {
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: clip;
+  display: inline-block;
+  font-size: 0.88rem;
 }
 
 @media (orientation: portrait) {
-  .square {
+  .email {
+    font-size: 0.84rem;
+  }
+  .person_info {
+    padding: 0 var(--item-gap) var(--item-gap) var(--item-gap);
+  }
+  .photo-card {
     max-width: 10em;
     margin-left: auto;
     margin-right: auto;

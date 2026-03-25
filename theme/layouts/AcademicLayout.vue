@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import PersonInfo from "@/components/Academic/PersonInfo.vue";
 import { useData } from "vitepress";
 import { computed } from "vue";
 
@@ -11,101 +10,56 @@ const lastUpdated_str = computed(() =>
 </script>
 
 <template>
-  <div class="rt-layout">
-    <PersonInfo class="sticky-top"></PersonInfo>
-    <div class="main">
-      <Content />
-      <div class="gray" v-if="lastUpdated">Last Updated on {{ lastUpdated_str }}</div>
-    </div>
+  <div class="academic-main">
+    <Content />
+    <div class="gray" v-if="lastUpdated">Last Updated on {{ lastUpdated_str }}</div>
   </div>
 </template>
 
 <style scoped>
-.rt-layout {
-  display: grid;
-  grid-template-columns: 16em 1fr;
-  align-items: start;
-
-  max-width: 35cm;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-
-  padding: 1em;
-
-  background-color: white;
-  border-radius: 3em;
-
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    Segoe UI,
-    Roboto,
-    Helvetica Neue,
-    Arial,
-    Noto Sans,
-    sans-serif,
-    Apple Color Emoji,
-    Segoe UI Emoji,
-    Segoe UI Symbol,
-    Noto Color Emoji;
+.academic-main {
+  padding: 2rem;
+  border-radius: 1rem;
+  background-color: var(--card-bg-color);
+  box-shadow: 0 8px 22px color-mix(in srgb, var(--text-color) 12%, transparent);
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  text-align: justify;
   white-space: normal;
   word-break: break-word;
   overflow-wrap: break-word;
-}
-
-.sticky-top {
-  position: sticky;
-  top: var(--top-panel-height);
 }
 
 .title {
   text-align: center;
 }
 
-.main {
-  padding: 2em;
-  font-size: 1.1em;
-}
-
 .gray {
-  color: gray;
+  color: color-mix(in srgb, var(--text-color) 60%, transparent);
+  margin-top: 1.4rem;
 }
 
 @media (orientation: portrait) {
-  .rt-layout {
-    grid-template-columns: 1fr;
-  }
-  .rt-wrapper {
-    padding: 0.5em;
-  }
-  .main {
-    padding: 1em;
-  }
-  .sticky-top {
-    position: static;
+  .academic-main {
+    padding: 1.25rem;
   }
 }
 </style>
 
 <style lang="scss">
-.main {
+.academic-main {
   h1 {
     text-align: center;
   }
 
-  // overflow: hidden;
   h1,
   h2,
   h3,
   h4 {
-    font-family:
-      "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial",
-      "Noto Sans", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-      "Noto Color Emoji";
-    color: #44566c;
+    font-family: var(--font-serif);
+    color: var(--text-title-color);
     font-weight: 600;
-    line-height: 1.3;
+    line-height: 1.5;
 
     a {
       color: unset;
@@ -115,6 +69,11 @@ const lastUpdated_str = computed(() =>
   a {
     text-decoration: none;
     color: var(--theme-color);
+    transition: color 0.2s ease;
+  }
+
+  a:hover {
+    color: color-mix(in srgb, var(--theme-color) 70%, black);
   }
 
   li {
@@ -122,8 +81,32 @@ const lastUpdated_str = computed(() =>
   }
 
   p {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    margin-top: 0.65em;
+    margin-bottom: 0.65em;
+    line-height: 1.68;
+  }
+
+  :deep(.edu-grid) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    gap: 1.25rem;
+    margin-top: 1.1rem;
+  }
+
+  :deep(.edu-grid .show-card) {
+    height: 100%;
+  }
+
+  :deep(.edu-grid .show-card .details p) {
+    margin: 0;
+  }
+}
+
+@media (orientation: portrait) {
+  .academic-main {
+    :deep(.edu-grid) {
+      grid-template-columns: 1fr;
+    }
   }
 }
 </style>
