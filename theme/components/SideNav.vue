@@ -5,15 +5,6 @@ import { onMounted, ref } from "vue";
 import { get_plan } from "@/client/leancloud";
 
 let messages = ref<string[]>([]);
-let hitokoto = ref<string>("");
-
-function load_hitokoto() {
-  fetch("https://v1.hitokoto.cn/")
-    .then((response) => response.json())
-    .then(function (myJson) {
-      hitokoto.value = myJson.hitokoto;
-    });
-}
 
 function load_messages() {
   get_plan()
@@ -30,20 +21,17 @@ function load_messages() {
     });
 }
 
-onMounted(load_hitokoto);
 onMounted(load_messages);
 </script>
 
 <template>
   <nav class="side">
     <slot name="up"></slot>
-    <SideCard v-if="hitokoto.length > 0">
-      <h3>一言</h3>
-      <i>{{ hitokoto }}</i>
-    </SideCard>
     <SideCard v-if="messages.length > 0">
       <h3>公告 & 计划</h3>
-      <div v-for:="msg in messages">{{ msg }}</div>
+      <div v-for="msg in messages" :key="msg">
+        {{ msg }}
+      </div>
     </SideCard>
     <ContactMe />
     <slot name="bottom"></slot>

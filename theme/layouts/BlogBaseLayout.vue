@@ -121,5 +121,6 @@ html {
   --font-sans: "sans-serif";
   scroll-behavior: smooth;
   scroll-padding-top: var(--top-panel-height);
+  overflow-y: scroll;
 }
 </style>

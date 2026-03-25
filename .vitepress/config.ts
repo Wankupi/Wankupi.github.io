@@ -67,7 +67,7 @@ export default defineConfigWithTheme<ThemeConfig>({
     ...markdownConfig
   },
   themeConfig: {
-    background: "url(/static/images/background/home-main.jpg) no-repeat",
+    background: `url(${baseUrl.replace(/\/+$/, "")}/static/images/background/home-main.jpg) no-repeat`,
     themeColor: "#007acc",
     nav: {
       brand: { text: "Wankupi's Website", link: "/" },
