@@ -81,8 +81,11 @@ const goToPage = (page: number) => {
   line-height: 2em;
   padding: 0 1.5em;
   transition-duration: 0.3s;
+  background: var(--card-bg-color);
+  color: var(--text-color);
 }
 
+.button:disabled,
 .button:hover {
   background-color: var(--theme-color);
   color: #fff;

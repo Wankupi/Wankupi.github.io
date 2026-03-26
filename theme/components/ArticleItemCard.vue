@@ -20,7 +20,7 @@ const { page } = defineProps<{ page: Page }>();
   padding: 0.5rem;
   transition-duration: 0.5s;
   border-radius: 0.3em;
-  background-color: rgb(from var(--card-bg-color) r g b / 0.9);
+  background-color: var(--card-bg-color);
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.5);
   border-left: var(--theme-color) 3px solid;
   transition-duration: 0.1s;
@@ -66,6 +66,6 @@ a {
 
 .button:hover {
   background-color: var(--theme-color);
-  color: #fff;
+  color: var(--text-color);
 }
 </style>

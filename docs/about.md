@@ -7,7 +7,7 @@ photo: "507A5148-500.jpg"
 location:
   - 'D19 SJTU'
   # - '31-G786 MIT'
-background: "linear-gradient(135deg, #f9fbff 0%, #ffffff 50%, #fff9fb 100%)"
+background: "linear-gradient(135deg, color-mix(in srgb, skyblue 10%, light-dark(white, #292929)) 0%, light-dark(white, #292929) 50%, color-mix(in srgb, pink 10%, light-dark(white, #292929)) 100%)"
 ---
 
 # Kunpeng Wang | 王鲲鹏

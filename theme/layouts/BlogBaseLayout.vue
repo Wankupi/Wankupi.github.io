@@ -14,12 +14,11 @@ const { theme, frontmatter } = useData();
 
 const layoutStyle = computed<Record<string, string>>(() => {
   const config = (theme.value ?? {}) as ThemeConfig;
-  const bg =
-    (frontmatter.value.background as string)?.trim() || config.background?.trim() || "#eee";
+  const bg = (frontmatter.value.background as string)?.trim() || config.background?.trim();
 
   return {
     "--theme-color": config.themeColor ?? "skyblue",
-    "--layout-bg": bg
+    ...(bg ? { "--layout-bg": bg } : {})
   };
 });
 </script>
@@ -42,12 +41,8 @@ const layoutStyle = computed<Record<string, string>>(() => {
 </template>
 
 <style>
-a {
-  text-decoration: none;
-  color: var(--text-color);
-}
-
 :root {
+  color-scheme: light dark;
   --top-panel-height: 3rem;
   --footer-height: 8rem;
   --item-gap: 1rem;
@@ -65,17 +60,17 @@ html {
 
 <style scoped>
 .rt-layout {
+  --text-color: light-dark(black, #e3e3e3);
   --text-title-color: var(--text-color);
-  --card-bg-color: white;
-  --text-color: black;
-  --nav-hover-bg: color-mix(in srgb, var(--text-color) 8%, transparent);
-  --nav-hover-color: var(--text-color);
+  --card-bg-color: light-dark(#ffffffe0, #333333e0);
+  /* Below would be overridden by inline CSS */
+  --layout-bg: light-dark(#eee, #292929);
   --theme-color: skyblue;
-  --layout-bg: #eee;
 }
 
 .rt-layout {
   font-family: var(--font-sans);
+  color: var(--text-color);
 }
 .rt-layout.bg::before {
   content: "";
@@ -136,5 +131,10 @@ nav {
     position: static;
     margin: 0;
   }
+}
+
+:deep(a) {
+  text-decoration: none;
+  color: var(--text-color);
 }
 </style>

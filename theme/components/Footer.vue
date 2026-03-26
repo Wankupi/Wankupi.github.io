@@ -16,6 +16,7 @@ footer {
     position: relative;
     width: 100%;
     backdrop-filter: blur(20px) grayscale(0.5);
+    background-color: rgb(from var(--card-bg-color) r g b / 0.5);
     font-size: small;
     color: var(--text-color);
     min-height: var(--footer-height);

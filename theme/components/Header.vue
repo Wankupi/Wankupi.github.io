@@ -27,7 +27,7 @@ const { theme } = useData();
   right: 0;
   height: var(--top-panel-height);
   z-index: 10;
-  background-color: var(--card-bg-color);
+  background-color: rgba(from var(--card-bg-color) r g b / 1);
   transition-duration: 0.4s;
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.5);
   padding: 0 20px;
