@@ -25,31 +25,13 @@ onMounted(load_messages);
 </script>
 
 <template>
-  <nav class="side">
-    <slot name="up"></slot>
-    <SideCard v-if="messages.length > 0">
-      <h3>公告 & 计划</h3>
-      <div v-for="msg in messages" :key="msg">
-        {{ msg }}
-      </div>
-    </SideCard>
-    <ContactMe />
-    <slot name="bottom"></slot>
-  </nav>
+  <slot name="up"></slot>
+  <SideCard v-if="messages.length > 0">
+    <h3>公告 & 计划</h3>
+    <div v-for="msg in messages" :key="msg">
+      {{ msg }}
+    </div>
+  </SideCard>
+  <ContactMe />
+  <slot name="bottom"></slot>
 </template>
-
-<style scoped>
-nav.side {
-  position: sticky;
-  width: 100%;
-  top: 3rem;
-  margin-bottom: 2rem;
-}
-
-@media (orientation: portrait) {
-  nav.side {
-    position: static;
-    margin: 0 0 var(--item-gap) 0;
-  }
-}
-</style>

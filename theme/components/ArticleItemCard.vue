@@ -17,7 +17,6 @@ const { page } = defineProps<{ page: Page }>();
 
 <style scoped>
 .list-card {
-  margin-bottom: var(--item-gap);
   padding: 0.5rem;
   transition-duration: 0.5s;
   border-radius: 0.3em;

@@ -10,11 +10,11 @@ const goBack = (): void => {
   } catch (e) {
     // ignore
   }
-  window.location.href = withBase('/');
+  window.location.href = withBase("/");
 };
 
 const goHome = (): void => {
-  window.location.href = withBase('/');
+  window.location.href = withBase("/");
 };
 </script>
 
@@ -48,7 +48,7 @@ const goHome = (): void => {
 .not-found p {
   font-size: 1.2rem;
   margin: 1rem 0;
-  color: var(--text-secondary, #666);
+  color: var(--text-color, #666);
 }
 
 /* unified button styles handled by .not-found .btn */
@@ -63,7 +63,7 @@ const goHome = (): void => {
 
 .not-found .btn {
   padding: 0.75rem 1.5rem;
-  background-color: var(--brand, #0066cc);
+  background-color: #0066cc;
   color: white;
   border-radius: 4px;
   text-decoration: none;

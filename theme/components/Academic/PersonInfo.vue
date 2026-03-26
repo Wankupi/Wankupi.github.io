@@ -16,48 +16,35 @@ const icon_size = "1.5em";
 </script>
 
 <template>
-  <div class="person_info">
-    <div class="photo-card" v-if="frontmatter.photo">
-      <img :src="withBase(frontmatter.photo)" />
-    </div>
-    <SideCard>
-      <div class="links">
-        <a :href="frontmatter.cv">
-          <Icon icon="academicons:cv" :width="icon_size" />
-        </a>
-        /
-        <a :href="`https://github.com/${frontmatter.github}`" target="_blank">
-          <Icon icon="mdi:github" :width="icon_size" />
-        </a>
-      </div>
-    </SideCard>
-    <SideCard>
-      <div class="info">
-        <div v-for="email in frontmatter.emails" :key="email" class="info-row">
-          <Icon icon="mdi:email-outline" :width="icon_size" />
-          <a :href="`mailto:${email}`" target="_blank" class="text-item email">{{ email }}</a>
-        </div>
-        <div v-for="location in frontmatter.location" :key="location" class="info-row">
-          <Icon icon="tdesign:location-filled" :width="icon_size" />
-          <span class="text-item">{{ location }}</span>
-        </div>
-      </div>
-    </SideCard>
+  <div class="photo-card" v-if="frontmatter.photo">
+    <img :src="withBase(frontmatter.photo)" />
   </div>
+  <SideCard>
+    <div class="links">
+      <a :href="frontmatter.cv">
+        <Icon icon="academicons:cv" :width="icon_size" />
+      </a>
+      /
+      <a :href="`https://github.com/${frontmatter.github}`" target="_blank">
+        <Icon icon="mdi:github" :width="icon_size" />
+      </a>
+    </div>
+  </SideCard>
+  <SideCard>
+    <div class="info">
+      <div v-for="email in frontmatter.emails" :key="email" class="info-row">
+        <Icon icon="mdi:email-outline" :width="icon_size" />
+        <a :href="`mailto:${email}`" target="_blank" class="text-item email">{{ email }}</a>
+      </div>
+      <div v-for="location in frontmatter.location" :key="location" class="info-row">
+        <Icon icon="tdesign:location-filled" :width="icon_size" />
+        <span class="text-item">{{ location }}</span>
+      </div>
+    </div>
+  </SideCard>
 </template>
 
 <style lang="scss" scoped>
-.person_info {
-  position: sticky;
-  top: var(--top-panel-height);
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  padding: 0;
-  color: var(--text-color);
-  font-family: var(--font-serif);
-}
-
 a {
   color: var(--text-color);
   transition: color 0.2s ease;
@@ -68,7 +55,6 @@ a:hover {
 }
 
 .photo-card {
-  margin-top: 1rem;
   border-radius: 0.75rem;
   overflow: hidden;
   aspect-ratio: 1/1;
@@ -118,9 +104,6 @@ a:hover {
 @media (orientation: portrait) {
   .email {
     font-size: 0.84rem;
-  }
-  .person_info {
-    padding: 0 var(--item-gap) var(--item-gap) var(--item-gap);
   }
   .photo-card {
     max-width: 10em;

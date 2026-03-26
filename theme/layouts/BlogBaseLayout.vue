@@ -14,13 +14,12 @@ const { theme, frontmatter } = useData();
 
 const layoutStyle = computed<Record<string, string>>(() => {
   const config = (theme.value ?? {}) as ThemeConfig;
-  const bg = (frontmatter.value.background as string)?.trim()
-    || config.background?.trim()
-    || "#eee";
+  const bg =
+    (frontmatter.value.background as string)?.trim() || config.background?.trim() || "#eee";
 
   return {
     "--theme-color": config.themeColor ?? "skyblue",
-    "--layout-bg": bg,
+    "--layout-bg": bg
   };
 });
 </script>
@@ -32,13 +31,37 @@ const layoutStyle = computed<Record<string, string>>(() => {
       <article>
         <slot name="article"></slot>
       </article>
-      <slot name="sidebar">
-        <SideNav></SideNav>
-      </slot>
+      <nav>
+        <slot name="sidebar">
+          <SideNav></SideNav>
+        </slot>
+      </nav>
     </main>
     <Footer></Footer>
   </div>
 </template>
+
+<style>
+a {
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+:root {
+  --top-panel-height: 3rem;
+  --footer-height: 8rem;
+  --item-gap: 1rem;
+  --font-serif: "serif";
+  --font-mono: "monospace";
+  --font-sans: "sans-serif";
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--top-panel-height);
+  overflow-y: scroll;
+}
+</style>
 
 <style scoped>
 .rt-layout {
@@ -52,7 +75,7 @@ const layoutStyle = computed<Record<string, string>>(() => {
 }
 
 .rt-layout {
-  position: relative;
+  font-family: var(--font-sans);
 }
 .rt-layout.bg::before {
   content: "";
@@ -75,52 +98,43 @@ main {
   margin-left: auto;
   margin-right: auto;
   margin-top: var(--top-panel-height);
+  min-height: calc(100vh - var(--top-panel-height) - var(--footer-height));
+  padding: var(--item-gap);
   display: grid;
   grid-template-columns: minmax(0, 1fr) 18rem;
+  gap: var(--item-gap);
   align-items: start;
-  min-height: calc(100vh - var(--top-panel-height) - var(--footer-height));
 }
 
-main > :nth-child(2) {
-  grid-column: 2;
+article {
+  display: flex;
+  flex-direction: column;
+  gap: var(--item-gap);
+}
+
+nav {
+  position: sticky;
+  width: 100%;
+  top: calc(var(--top-panel-height) + var(--item-gap));
+  display: flex;
+  flex-direction: column;
+  gap: var(--item-gap);
 }
 
 @media (orientation: portrait) {
   main {
     grid-template-columns: minmax(0, 1fr);
+    gap: var(--item-gap);
   }
 
-  main > :nth-child(2) {
+  nav {
     grid-column: 1;
     grid-row: 2;
-    width: auto;
-    margin-right: 0;
   }
-}
 
-article {
-  padding: var(--item-gap);
-}
-article > *:last-child {
-  margin-bottom: 0;
-}
-</style>
-
-<style>
-a {
-  text-decoration: none;
-  color: var(--text-color);
-}
-
-html {
-  --top-panel-height: 3rem;
-  --footer-height: 8rem;
-  --item-gap: 1rem;
-  --font-serif: "serif";
-  --font-mono: "monospace";
-  --font-sans: "sans-serif";
-  scroll-behavior: smooth;
-  scroll-padding-top: var(--top-panel-height);
-  overflow-y: scroll;
+  nav {
+    position: static;
+    margin: 0;
+  }
 }
 </style>

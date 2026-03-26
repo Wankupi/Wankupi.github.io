@@ -64,7 +64,7 @@ const goToPage = (page: number) => {
   grid-template-columns: repeat(auto-fit, minmax(2.5rem, max-content));
   justify-content: center;
   justify-items: center;
-  gap: 1em;
+  gap: var(--item-gap);
 }
 
 .left .button {

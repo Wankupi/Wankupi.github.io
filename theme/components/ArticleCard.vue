@@ -97,7 +97,6 @@ onMounted(async () => {
   background-color: var(--card-bg-color);
   box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.5);
   overflow-x: auto;
-  margin-bottom: var(--item-gap);
 }
 
 @media (orientation: portrait) {
