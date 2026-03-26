@@ -56,8 +56,7 @@ a {
   text-indent: 2em;
 }
 </style>
-
-<style>
+<style scoped>
 .button {
   border: var(--theme-color) solid 2px;
   border-radius: 0.5em;

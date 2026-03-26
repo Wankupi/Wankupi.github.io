@@ -31,7 +31,7 @@ import { Icon } from "@iconify/vue";
   </SideCard>
 </template>
 
-<style>
+<style scoped>
 .contact-me {
   display: flex;
   justify-content: space-around;
@@ -45,13 +45,13 @@ import { Icon } from "@iconify/vue";
   color: var(--theme-color);
 }
 
-.contact-me img {
+.contact-me :deep(img) {
   width: 1.5rem;
   height: 1.5rem;
   transition: linear 0.2s;
 }
 
-.contact-me img:hover {
+.contact-me :deep(img):hover {
   box-shadow: 0 0 3px black;
 }
 </style>

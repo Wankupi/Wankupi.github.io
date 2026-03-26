@@ -17,7 +17,7 @@ const { theme } = useData();
   </header>
 </template>
 
-<style>
+<style scoped>
 .top-panel {
   display: flex;
   position: fixed;

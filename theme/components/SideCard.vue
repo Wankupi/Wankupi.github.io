@@ -19,8 +19,8 @@
 }
 </style>
 
-<style>
-.side-card img {
+<style scoped>
+.side-card :deep(img) {
     width: 1em;
     height: 1em;
     vertical-align: middle;

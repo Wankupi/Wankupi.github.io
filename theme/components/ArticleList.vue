@@ -74,4 +74,17 @@ const goToPage = (page: number) => {
   align-items: center;
   text-align: center;
 }
+
+.button {
+  border: var(--theme-color) solid 2px;
+  border-radius: 0.5em;
+  line-height: 2em;
+  padding: 0 1.5em;
+  transition-duration: 0.3s;
+}
+
+.button:hover {
+  background-color: var(--theme-color);
+  color: #fff;
+}
 </style>

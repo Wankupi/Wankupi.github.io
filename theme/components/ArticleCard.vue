@@ -89,7 +89,7 @@ onMounted(async () => {
 });
 </script>
 
-<style>
+<style scoped lang="scss">
 .card {
   display: block;
   position: relative;
@@ -105,139 +105,138 @@ onMounted(async () => {
     padding: 1em;
   }
 }
-</style>
 
-<style lang="scss">
 .card#article {
   text-indent: 2em;
   line-height: 1.5;
   word-break: break-all;
   tab-size: 4;
 
-  h1,
-  h2,
-  h3,
-  h4 {
-    font-family: var(--font-serif);
-    text-align: left;
-    text-indent: 0;
-    letter-spacing: 0.01em;
-    margin-top: 0.5rem;
-    // margin-bottom: 0.5rem;
-    transition: color 0.2s;
-    &:hover {
+  :deep() {
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: var(--font-serif);
+      text-align: left;
+      text-indent: 0;
+      letter-spacing: 0.01em;
+      margin-top: 0.5rem;
+      // margin-bottom: 0.5rem;
+      transition: color 0.2s;
+      &:hover {
+        color: var(--theme-color);
+      }
+    }
+
+    h1::before,
+    h2::before,
+    h3::before,
+    h4::before {
+      color: var(--theme-color);
+      font-family: var(--font-mono);
+      font-size: 0.8em;
+      margin-right: 0.3rem;
+    }
+
+    h1::before {
+      content: "#";
+    }
+    h2::before {
+      content: "##";
+    }
+    h3::before {
+      content: "###";
+    }
+    h4::before {
+      content: "####";
+    }
+
+    ul,
+    ol {
+      padding-left: 1.5em;
+      text-indent: 0;
+    }
+
+    img {
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 20em;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+    }
+
+    a {
+      color: var(--theme-color);
+      text-decoration: underline;
+    }
+    a.header-anchor {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    pre {
+      text-indent: 0;
+    }
+    pre > code {
+      display: block;
+      padding: 0.5em;
+      border-radius: 0.5em;
+      overflow-x: auto;
+    }
+    pre > code:not(.hljs) {
+      background-color: #212121;
+      color: #eff;
+    }
+
+    :not(pre) > code {
+      padding: 2px 5px;
+      border-radius: 3px;
+      background: color-mix(in srgb, var(--theme-color) 8%, transparent);
       color: var(--theme-color);
     }
-  }
 
-  h1::before,
-  h2::before,
-  h3::before,
-  h4::before {
-    color: var(--theme-color);
-    font-family: var(--font-mono);
-    font-size: 0.8em;
-    margin-right: 0.3rem;
-  }
+    p {
+      margin: 0.3em 0;
+    }
 
-  h1::before {
-    content: "#";
-  }
+    blockquote {
+      text-indent: 0;
+      margin: 1em 0;
+      padding: 0.5em 1em;
+      border-left: 3px solid var(--theme-color);
+      background: color-mix(in srgb, var(--theme-color) 5%, transparent);
+      border-radius: 0 0.3em 0.3em 0;
+    }
 
-  h2::before {
-    content: "##";
-  }
+    table {
+      text-indent: 0;
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1em 0;
+    }
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 0.5em 0.8em;
+      text-align: left;
+    }
+    th {
+      background: color-mix(in srgb, var(--theme-color) 10%, transparent);
+    }
+    hr {
+      border: none;
+      border-top: 2px solid color-mix(in srgb, var(--theme-color) 30%, transparent);
+      margin: 1.5em 0;
+    }
 
-  h3::before {
-    content: "###";
-  }
-
-  h4::before {
-    content: "####";
-  }
-
-  ul,
-  ol {
-    padding-left: 1.5em;
-  }
-  ul,
-  ol {
-    text-indent: 0;
-  }
-  img {
-    width: auto;
-    height: auto;
-    max-width: 100%;
-    max-height: 20em;
-    /* display: block; */
-    margin-left: auto;
-    margin-right: auto;
-  }
-  a {
-    color: var(--theme-color);
-    text-decoration: underline;
-  }
-  a.header-anchor {
-    text-decoration: none;
-    color: inherit;
-  }
-  pre {
-    text-indent: 0;
-  }
-  pre > code {
-    display: block;
-    padding: 0.5em;
-    border-radius: 0.5em;
-    overflow-x: auto;
-  }
-  pre > code:not(.hljs) {
-    background-color: #212121;
-    color: #eff;
-  }
-  :not(pre) > code {
-    padding: 2px 5px;
-    border-radius: 3px;
-    background: color-mix(in srgb, var(--theme-color) 8%, transparent);
-    color: var(--theme-color);
-  }
-  p {
-    margin: 0.3em 0;
-  }
-  blockquote {
-    text-indent: 0;
-    margin: 1em 0;
-    padding: 0.5em 1em;
-    border-left: 3px solid var(--theme-color);
-    background: color-mix(in srgb, var(--theme-color) 5%, transparent);
-    border-radius: 0 0.3em 0.3em 0;
-  }
-  table {
-    text-indent: 0;
-    width: 100%;
-    border-collapse: collapse;
-    margin: 1em 0;
-  }
-  th,
-  td {
-    border: 1px solid #ddd;
-    padding: 0.5em 0.8em;
-    text-align: left;
-  }
-  th {
-    background: color-mix(in srgb, var(--theme-color) 10%, transparent);
-  }
-  hr {
-    border: none;
-    border-top: 2px solid color-mix(in srgb, var(--theme-color) 30%, transparent);
-    margin: 1.5em 0;
-  }
-  img {
-    display: block;
-  }
-  .vp-adaptive-theme[class^="language-"] {
-    .lang,
-    .copy {
-      display: none;
+    .vp-adaptive-theme[class^="language-"] {
+      .lang,
+      .copy {
+        display: none;
+      }
     }
   }
 }

@@ -26,7 +26,7 @@ const cnt_comment = ref<number>(0);
   </div>
 </template>
 
-<style>
+<style scoped>
 .art-meta {
   display: grid;
   grid-auto-flow: column;

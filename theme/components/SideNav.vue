@@ -38,7 +38,7 @@ onMounted(load_messages);
   </nav>
 </template>
 
-<style>
+<style scoped>
 nav.side {
   position: sticky;
   width: 100%;
