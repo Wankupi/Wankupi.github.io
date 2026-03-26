@@ -8,6 +8,12 @@ export interface NavItem {
   icon: string;
 }
 
+export interface ContactItem {
+  icon: string;
+  href: string;
+  title: string;
+}
+
 export interface ThemeConfig {
   nav: {
     brand: { text: string; link: string };
@@ -15,6 +21,7 @@ export interface ThemeConfig {
   };
   themeColor?: string;
   background?: string;
+  contacts?: ContactItem[];
 }
 
 export function use_math_converter(md: MarkdownIt) {

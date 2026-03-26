@@ -66,6 +66,7 @@ export default defineConfigWithTheme<ThemeConfig>({
   markdown: {
     ...markdownConfig
   },
+  lang: "zh-CN",
   themeConfig: {
     background: `url(${baseUrl.replace(/\/+$/, "")}/static/images/background/home-main.jpg) no-repeat`,
     themeColor: "#007acc",
@@ -76,6 +77,38 @@ export default defineConfigWithTheme<ThemeConfig>({
         { text: "关于", link: "/about", icon: "mdi:more-horiz" },
         { text: "Academic", link: "/about", icon: "mdi:academic-cap" }
       ]
-    }
+    },
+    contacts: [
+      {
+        icon: "mdi:email",
+        href: "mailto:kunpengwang@sjtu.edu.cn",
+        title: "email"
+      },
+      {
+        icon: "mdi:github",
+        href: "https://github.com/Wankupi",
+        title: "github"
+      },
+      {
+        icon: "simple-icons:qq",
+        href: "https://wpa.qq.com/msgrd?v=3&uin=2893353848&site=qq&menu=yes",
+        title: "qq"
+      },
+      {
+        title: "bilibili",
+        icon: "streamline-ultimate:bilibili-logo-bold",
+        href: "https://space.bilibili.com/488096454"
+      },
+      {
+        title: "Zhihu",
+        icon: "simple-icons:zhihu",
+        href: "https://www.zhihu.com/people/Wankupi"
+      },
+      {
+        title: "Netease Cloud Music",
+        icon: "ri:netease-cloud-music-fill",
+        href: "https://music.163.com/#/user/home?id=552180677"
+      }
+    ]
   }
 });

@@ -1,32 +1,24 @@
 <script setup lang="ts">
 import SideCard from "./SideCard.vue";
 import { Icon } from "@iconify/vue";
+import { useData } from "vitepress";
+import type { ContactItem } from "../config";
+
+const { theme } = useData<any>();
+const contacts = (theme.value.contacts ?? []) as ContactItem[];
 </script>
 
 <template>
-  <SideCard class="contact-me">
+  <SideCard class="contact-me" v-if="contacts.length">
     <a
-      href="mailto:kunpengWang@sjtu.edu.cn"
-      title="email"
+      v-for="contact in contacts"
+      :key="contact.title"
+      :href="contact.href"
+      :title="contact.title"
       target="_blank"
       rel="noopener noreferrer"
     >
-      <Icon icon="mdi:email" width="1.2em" />
-    </a>
-    <a
-      href="https://github.com/Wankupi"
-      title="github"
-      target="_blank"
-      rel="noopener noreferrer"
-      ><Icon icon="mdi:github" width="1.2em"
-    /></a>
-    <a
-      href="https://wpa.qq.com/msgrd?v=3&uin=2893353848&site=qq&menu=yes"
-      title="qq"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <Icon icon="simple-icons:qq" width="1.2em" />
+      <Icon :icon="contact.icon" width="1.2em" />
     </a>
   </SideCard>
 </template>
@@ -43,15 +35,5 @@ import { Icon } from "@iconify/vue";
 
 .contact-me a:hover {
   color: var(--theme-color);
-}
-
-.contact-me :deep(img) {
-  width: 1.5rem;
-  height: 1.5rem;
-  transition: linear 0.2s;
-}
-
-.contact-me :deep(img):hover {
-  box-shadow: 0 0 3px black;
 }
 </style>
