@@ -16,7 +16,7 @@ const lastUpdated_str = computed(() =>
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .academic-main {
   padding: 2rem;
   border-radius: 1rem;
@@ -41,13 +41,12 @@ const lastUpdated_str = computed(() =>
 
 @media (orientation: portrait) {
   .academic-main {
-    padding: 1.25rem;
+    padding: 1rem;
+    text-align: start;
   }
 }
-</style>
 
-<style lang="scss">
-.academic-main {
+.academic-main :deep() {
   h1 {
     text-align: center;
   }
@@ -60,10 +59,6 @@ const lastUpdated_str = computed(() =>
     color: var(--text-title-color);
     font-weight: 600;
     line-height: 1.5;
-
-    a {
-      color: unset;
-    }
   }
 
   a {
@@ -76,35 +71,40 @@ const lastUpdated_str = computed(() =>
     color: color-mix(in srgb, var(--theme-color) 70%, black);
   }
 
+  a.header-anchor {
+    color: inherit;
+  }
+
   li {
     margin-left: 1em;
   }
 
-  p {
+  p,
+  ul {
     margin-top: 0.65em;
     margin-bottom: 0.65em;
     line-height: 1.68;
   }
 
-  :deep(.edu-grid) {
+  .edu-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
     gap: 1.25rem;
     margin-top: 1.1rem;
   }
 
-  :deep(.edu-grid .show-card) {
+  .edu-grid .show-card {
     height: 100%;
   }
 
-  :deep(.edu-grid .show-card .details p) {
+  .edu-grid .show-card .details p {
     margin: 0;
   }
 }
 
 @media (orientation: portrait) {
   .academic-main {
-    :deep(.edu-grid) {
+    .edu-grid {
       grid-template-columns: 1fr;
     }
   }
