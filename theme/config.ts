@@ -49,19 +49,7 @@ export let markdownConfig: MarkdownOptions = {
   },
   anchor: {
     permalink(slug, opts, state, index) {
-      const linkOpen = Object.assign(new state.Token("link_open", "a", 1), {
-        attrs: [
-          ["href", `#${slug}`],
-          ["class", "header-anchor"],
-          ["aria-label", `Permalink to ${slug}`]
-        ]
-      });
-      const linkClose = new state.Token("link_close", "a", -1);
-      const children = state.tokens[index + 1]?.children;
-      if (children) {
-        children.unshift(linkOpen);
-        children.push(linkClose);
-      }
+      /* pass */
     }
   }
 };
