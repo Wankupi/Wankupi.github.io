@@ -12,7 +12,6 @@ interface HeaderItem {
 const headers = ref<HeaderItem[]>([]);
 
 function updateTOC() {
-  console.log("Updating TOC...");
   const root =
     document.querySelector("#article") ||
     document.querySelector("article") ||
