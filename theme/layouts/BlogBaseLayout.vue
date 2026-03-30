@@ -46,6 +46,7 @@ const layoutStyle = computed<Record<string, string>>(() => {
   --top-panel-height: 3rem;
   --footer-height: 8rem;
   --item-gap: 1rem;
+  --card-radius: 0.3rem;
   --font-serif: "serif";
   --font-mono: "monospace";
   --font-sans: "sans-serif";

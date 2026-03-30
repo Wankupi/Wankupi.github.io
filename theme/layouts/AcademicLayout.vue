@@ -19,7 +19,7 @@ const lastUpdated_str = computed(() =>
 <style lang="scss" scoped>
 .academic-main {
   padding: 2rem;
-  border-radius: 1rem;
+  border-radius: var(--card-radius);
   background-color: var(--card-bg-color);
   box-shadow: 0 8px 22px color-mix(in srgb, var(--text-color) 12%, transparent);
   font-family: var(--font-serif);

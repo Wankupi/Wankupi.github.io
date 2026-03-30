@@ -9,7 +9,7 @@
     border-right: var(--theme-color) 3px solid;
     text-align: center;
     background-color: var(--card-bg-color);
-    border-radius: 0.3rem;
+    border-radius: var(--card-radius);
 }
 
 .side-card:empty {

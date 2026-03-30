@@ -12,15 +12,12 @@ interface HeaderItem {
 const headers = ref<HeaderItem[]>([]);
 
 function updateTOC() {
-  const root =
-    document.querySelector("#article") ||
-    document.querySelector("article") ||
-    document.querySelector(".markdown-body");
+  const root = document.querySelector("#article");
   if (!root) {
     headers.value = [];
     return;
   }
-  const nodes = Array.from(root.querySelectorAll("h2, h3, h4"));
+  const nodes = Array.from(root.querySelectorAll("h1, h2, h3, h4"));
   headers.value = nodes
     .map((el) => {
       const id = (el as HTMLElement).id || "";
@@ -33,14 +30,6 @@ onMounted(() => {
   updateTOC();
   onContentUpdated(updateTOC);
 });
-
-function scrollTo(id: string) {
-  const el = document.getElementById(id);
-  if (el) {
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
-    history.replaceState(null, "", `#${id}`);
-  }
-}
 </script>
 
 <template>
@@ -49,7 +38,7 @@ function scrollTo(id: string) {
     <nav v-if="headers.length" class="toc">
       <ul>
         <li v-for="h in headers" :key="h.id" :class="`level-${h.level}`">
-          <a :href="`#${h.id}`" @click.prevent="scrollTo(h.id)">{{ h.text }}</a>
+          <a :href="`#${h.id}`">{{ h.text }}</a>
         </li>
       </ul>
     </nav>
@@ -80,13 +69,20 @@ function scrollTo(id: string) {
 .toc a:hover {
   text-decoration: underline;
 }
-.level-3 {
-  padding-left: 1rem;
+.toc {
+  --indent: 0.5em;
+}
+.level-2 {
+  padding-left: var(--indent);
   font-size: 0.95em;
 }
-.level-4 {
-  padding-left: 2rem;
+.level-3 {
+  padding-left: calc(2 * var(--indent));
   font-size: 0.9em;
+}
+.level-4 {
+  padding-left: calc(3 * var(--indent));
+  font-size: 0.8em;
 }
 .toc-empty {
   color: var(--text-color);

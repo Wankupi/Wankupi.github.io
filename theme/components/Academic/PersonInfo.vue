@@ -55,7 +55,7 @@ a:hover {
 }
 
 .photo-card {
-  border-radius: 0.75rem;
+  border-radius: var(--card-radius);
   overflow: hidden;
   aspect-ratio: 1/1;
 }

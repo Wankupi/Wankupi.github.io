@@ -40,7 +40,7 @@ export default defineLoader({
 
       const src = fs.readFileSync(file, "utf-8");
 
-      const { data: frontmatter, excerpt } = matter(src);
+      const { data: frontmatter, excerpt, content } = matter(src);
 
       const url =
         "/" +
@@ -49,7 +49,7 @@ export default defineLoader({
           .replace(/\.md$/, config.cleanUrls ? "" : ".html");
 
       const data: Page = {
-        title: frontmatter.title,
+        title: frontmatter.title ?? content.match(/^\s*#\s+(.+)$/m)?.[1] ?? "Untitled",
         frontmatter: frontmatter,
         excerpt: excerpt,
         url: url,
