@@ -6,6 +6,7 @@ const frontmatter = usePageFrontmatter<{
   photo: string | null;
   cv: string;
   github: string;
+  orcid?: string;
   emails: string[];
   location: string[];
 }>();
@@ -24,9 +25,11 @@ const icon_size = "1.5em";
       <a :href="frontmatter.cv">
         <Icon icon="academicons:cv" :width="icon_size" />
       </a>
-      /
       <a :href="`https://github.com/${frontmatter.github}`" target="_blank">
         <Icon icon="mdi:github" :width="icon_size" />
+      </a>
+      <a v-if="frontmatter.orcid" :href="`https://orcid.org/${frontmatter.orcid}`" target="_blank">
+        <Icon icon="academicons:orcid" :width="icon_size" color="#a6ce39" />
       </a>
     </div>
   </SideCard>

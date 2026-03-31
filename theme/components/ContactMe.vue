@@ -18,7 +18,7 @@ const contacts = (theme.value.contacts ?? []) as ContactItem[];
       target="_blank"
       rel="noopener noreferrer"
     >
-      <Icon :icon="contact.icon" width="1.2em" />
+      <Icon :icon="contact.icon" width="1.2em" :color="contact.color" />
     </a>
   </SideCard>
 </template>

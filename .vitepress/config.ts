@@ -89,6 +89,12 @@ export default defineConfigWithTheme<ThemeConfig>({
         title: "github"
       },
       {
+        icon: "academicons:orcid",
+        href: "https://orcid.org/0009-0007-3720-6319",
+        title: "orcid",
+        color: "#a6ce39"
+      },
+      {
         icon: "simple-icons:qq",
         href: "https://wpa.qq.com/msgrd?v=3&uin=2893353848&site=qq&menu=yes",
         title: "qq"

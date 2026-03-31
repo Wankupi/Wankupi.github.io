@@ -1,6 +1,7 @@
 ---
 layout: Academic
 github: Wankupi
+orcid: 0009-0007-3720-6319
 cv: cv.pdf
 emails: ["kunpengwang@sjtu.edu.cn", "kunpengw@mit.edu"]
 photo: "507A5148-500.jpg"

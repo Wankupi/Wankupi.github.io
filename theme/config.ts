@@ -12,6 +12,7 @@ export interface ContactItem {
   icon: string;
   href: string;
   title: string;
+  color?: string;
 }
 
 export interface ThemeConfig {
