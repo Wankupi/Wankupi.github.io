@@ -7,36 +7,151 @@ import {
 import fs from "fs-extra";
 import matter from "gray-matter";
 import path from "node:path";
+import { execFileSync } from "node:child_process";
 import { normalizePath } from "vite";
 
 export interface Page {
   title: string;
   url: string;
-  date: number;
+  updated_at: number;
+  created_at: number;
   excerpt: string | undefined;
   frontmatter?: { [key: string]: any };
 }
 declare const data: Page[];
 export { data };
 
-const cache = new Map<string, { data: any; timestamp: number }>();
+type MemoryCacheEntry = {
+  data: Page;
+  mtimeMs: number;
+  size: number;
+};
+
+type PersistentCacheEntry = {
+  createdAt: number;
+  lastCommitAt: number;
+  mtimeMs: number;
+  size: number;
+};
+
+const cache = new Map<string, MemoryCacheEntry>();
+const persistentCache = new Map<string, PersistentCacheEntry>();
+let persistentCacheLoaded = false;
+let persistentCacheDirty = false;
 
 const config: SiteConfig = (global as any).VITEPRESS_CONFIG;
 if (!config) throw "undefine global";
 
+const persistentCacheFile = path.resolve(config.srcDir, "../theme/data/.posts-cache.json");
+
+function loadPersistentCache(): void {
+  if (persistentCacheLoaded) return;
+  persistentCacheLoaded = true;
+  if (!fs.existsSync(persistentCacheFile)) return;
+  try {
+    const raw = fs.readJsonSync(persistentCacheFile) as Record<string, PersistentCacheEntry>;
+    for (const [key, value] of Object.entries(raw)) {
+      if (
+        value &&
+        Number.isFinite(value.createdAt) &&
+        Number.isFinite(value.lastCommitAt) &&
+        Number.isFinite(value.mtimeMs) &&
+        Number.isFinite(value.size)
+      ) {
+        persistentCache.set(key, value);
+      }
+    }
+  } catch {
+    // Ignore invalid cache content and rebuild on this run.
+  }
+}
+
+function savePersistentCache(): void {
+  if (!persistentCacheDirty) return;
+  fs.ensureDirSync(path.dirname(persistentCacheFile));
+  const serializable = Object.fromEntries(persistentCache.entries());
+  const tmpFile = `${persistentCacheFile}.tmp`;
+  fs.writeJsonSync(tmpFile, serializable, { spaces: 2 });
+  fs.moveSync(tmpFile, persistentCacheFile, { overwrite: true });
+  persistentCacheDirty = false;
+}
+
+function getFileCreatedFallback(stats: fs.Stats): number {
+  if (stats.birthtimeMs > 0) return stats.birthtimeMs;
+  if (stats.ctimeMs > 0) return stats.ctimeMs;
+  return stats.mtimeMs;
+}
+
+function runGitTimestamp(args: string[], cwd: string): number | null {
+  try {
+    const output = execFileSync("git", args, {
+      cwd,
+      encoding: "utf-8",
+      stdio: ["ignore", "pipe", "ignore"]
+    }).trim();
+    if (!output) return null;
+    const values = output
+      .split(/\r?\n/)
+      .map((line) => Number.parseInt(line.trim(), 10))
+      .filter((value) => Number.isFinite(value) && value > 0)
+      .map((seconds) => seconds * 1000);
+    if (values.length === 0) return null;
+    return Math.min(...values);
+  } catch {
+    return null;
+  }
+}
+
+function resolveTimes(file: string, stats: fs.Stats, cacheKey: string): {
+  createdAt: number;
+  lastCommitAt: number;
+} {
+  const cached = persistentCache.get(cacheKey);
+  if (cached && cached.mtimeMs === stats.mtimeMs && cached.size === stats.size) {
+    return { createdAt: cached.createdAt, lastCommitAt: cached.lastCommitAt };
+  }
+
+  const cwd = path.dirname(file);
+  const gitPath = path.basename(file);
+  const createdFallback = getFileCreatedFallback(stats);
+  const lastCommitFallback = stats.mtimeMs;
+
+  const firstCommitAt = runGitTimestamp(
+    ["log", "--diff-filter=A", "--follow", "--format=%ct", "--", gitPath],
+    cwd
+  );
+  const lastCommitAtRaw = runGitTimestamp(
+    ["log", "-1", "--format=%ct", "--", gitPath],
+    cwd
+  );
+
+  const createdAt = firstCommitAt ?? createdFallback;
+  const lastCommitAt = lastCommitAtRaw ?? lastCommitFallback;
+
+  persistentCache.set(cacheKey, {
+    createdAt,
+    lastCommitAt,
+    mtimeMs: stats.mtimeMs,
+    size: stats.size
+  });
+  persistentCacheDirty = true;
+
+  return { createdAt, lastCommitAt };
+}
+
 export default defineLoader({
   watch: normalizePath(path.resolve(config.srcDir, "Article/**/*.md")),
   async load(watchedFiles) {
-    const md = await createMarkdownRenderer(
-      config.srcDir,
-      config.markdown,
-      config.site.base,
-      config.logger
-    );
+    loadPersistentCache();
     async function processFile(file: string): Promise<Page | null> {
-      const timestamp = fs.statSync(file).mtimeMs;
+      const stats = fs.statSync(file);
+      const cacheKey = normalizePath(path.relative(config.srcDir, file));
       const cached = cache.get(file);
-      if (cached && timestamp === cached.timestamp) return cached.data;
+      if (cached && stats.mtimeMs === cached.mtimeMs && stats.size === cached.size) {
+        return cached.data;
+      }
+
+      const { createdAt, lastCommitAt } = resolveTimes(file, stats, cacheKey);
 
       const src = fs.readFileSync(file, "utf-8");
 
@@ -53,15 +168,17 @@ export default defineLoader({
         frontmatter: frontmatter,
         excerpt: excerpt,
         url: url,
-        date: timestamp
+        updated_at: lastCommitAt,
+        created_at: createdAt
       };
 
-      cache.set(file, { data, timestamp });
+      cache.set(file, { data, mtimeMs: stats.mtimeMs, size: stats.size });
       return data;
     }
     let raw = await Promise.all(watchedFiles.map(processFile));
     let res = raw.filter((x) => x != null);
-    res.sort((a, b) => b.date - a.date);
+    res.sort((a, b) => b.updated_at - a.updated_at);
+    savePersistentCache();
     return res;
   }
 });

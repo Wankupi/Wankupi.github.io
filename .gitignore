@@ -11,3 +11,4 @@ node_modules/
 .temp
 components.d.ts
 .vscode/
+theme/data/.posts-cache.json
