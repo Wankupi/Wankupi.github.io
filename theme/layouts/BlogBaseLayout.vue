@@ -94,7 +94,8 @@ main {
   margin-left: auto;
   margin-right: auto;
   margin-top: var(--top-panel-height);
-  min-height: calc(100vh - var(--top-panel-height) - var(--footer-height));
+  margin-bottom: var(--item-gap);
+  min-height: calc(100vh - var(--top-panel-height) - var(--footer-height) - var(--item-gap));
   padding: var(--item-gap);
   display: grid;
   grid-template-columns: minmax(0, 1fr) 18rem;

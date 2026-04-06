@@ -68,13 +68,16 @@ export default defineConfigWithTheme<ThemeConfig>({
   },
   lang: "zh-CN",
   themeConfig: {
-    background: `linear-gradient(light-dark(transparent, #000000c0)), url(${baseUrl.replace(/\/+$/, "")}/static/images/background/home-main.jpg) no-repeat`,
-    themeColor: "#599ecd",
+    background: `linear-gradient(135deg,
+color-mix(in srgb, skyblue 10%, light-dark(white, #292929)) 0%,
+light-dark(white, #292929) 50%,
+color-mix(in srgb, pink 10%, light-dark(white, #292929)) 100%)`,
+    themeColor: "#1772d0",
     nav: {
       brand: { text: "Wankupi's Website", link: "/" },
       items: [
-        { text: "主页", link: "/", icon: "material-symbols:home" },
-        { text: "Academic", link: "/about", icon: "mdi:academic-cap" }
+        { text: "Home", link: "/", icon: "material-symbols:home" },
+        { text: "Blog", link: "/blog", icon: "fa7-solid:blog" }
       ]
     },
     contacts: [

@@ -178,6 +178,7 @@ const statusText = computed(() => {
 
 .details {
   margin-top: 0.25rem;
+  font-size: 0.9rem;
 }
 
 .details :deep(ul),
