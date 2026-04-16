@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import { initColorMode, colorMode } from "@/client/color-mode";
 import Header from "@/components/Header.vue";
 import SideNav from "@/components/SideNav.vue";
 import Footer from "@/components/Footer.vue";
 import type { ThemeConfig } from "@/config";
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import { useData } from "vitepress";
 
 defineProps<{
@@ -21,10 +22,15 @@ const layoutStyle = computed<Record<string, string>>(() => {
     ...(bg ? { "--layout-bg": bg } : {})
   };
 });
+
+onMounted(initColorMode);
+const color_mode_class = computed(() => {
+  return colorMode.value == "auto" ? null : `color-mode-${colorMode.value}`;
+});
 </script>
 
 <template>
-  <div class="rt-layout bg" :style="layoutStyle">
+  <div class="rt-layout bg" :class="color_mode_class" :style="layoutStyle">
     <Header></Header>
     <main class="max-width-30cm">
       <article>
@@ -73,6 +79,15 @@ html {
   font-family: var(--font-sans);
   color: var(--text-color);
 }
+
+.rt-layout.color-mode-light {
+  color-scheme: light;
+}
+
+.rt-layout.color-mode-dark {
+  color-scheme: dark;
+}
+
 .rt-layout.bg::before {
   content: "";
   position: fixed;

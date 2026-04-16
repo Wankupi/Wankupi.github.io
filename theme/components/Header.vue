@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
+import { toggleColorMode, colorMode } from "@/client/color-mode";
 import { withBase, useData } from "vitepress";
 
 const { theme } = useData();
@@ -14,6 +15,18 @@ const { theme } = useData();
       <Icon :icon="item.icon" width="1em"></Icon>
       <span>{{ item.text }}</span>
     </a>
+    <button class="mode-toggle" type="button" @click="toggleColorMode">
+      <Icon
+        :icon="
+          colorMode === 'dark'
+            ? 'mdi:weather-night'
+            : colorMode === 'light'
+              ? 'mdi:white-balance-sunny'
+              : 'mdi:theme-light-dark'
+        "
+        width="1em"
+      />
+    </button>
   </header>
 </template>
 
@@ -46,13 +59,21 @@ const { theme } = useData();
 .top-panel > *:not(:first-child) {
   padding: 4px 10px;
   border-radius: 6px;
-  transition: background-color 0.2s, color 0.2s;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
   cursor: pointer;
 }
 
 .top-panel > *:not(:first-child):hover {
   background-color: var(--theme-color);
   color: #fff;
+}
+
+.mode-toggle {
+  border: none;
+  background: transparent;
+  font: inherit;
 }
 
 @media print {
