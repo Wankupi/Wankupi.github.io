@@ -68,10 +68,7 @@ export default defineConfigWithTheme<ThemeConfig>({
   },
   lang: "zh-CN",
   themeConfig: {
-    background: `linear-gradient(135deg,
-color-mix(in srgb, skyblue 10%, light-dark(white, #292929)) 0%,
-light-dark(white, #292929) 50%,
-color-mix(in srgb, pink 10%, light-dark(white, #292929)) 100%)`,
+    background: "light-dark(#eeeeee, #292929)",
     themeColor: "#1772d0",
     nav: {
       brand: { text: "Wankupi's Website", link: "/" },
