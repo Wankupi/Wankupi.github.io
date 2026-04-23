@@ -17,6 +17,7 @@ export interface Page {
   created_at: number;
   excerpt: string | undefined;
   frontmatter?: { [key: string]: any };
+  hide: boolean;
 }
 declare const data: Page[];
 export { data };
@@ -169,7 +170,8 @@ export default defineLoader({
         excerpt: excerpt,
         url: url,
         updated_at: lastCommitAt,
-        created_at: createdAt
+        created_at: createdAt,
+        hide: frontmatter.hide === true
       };
 
       cache.set(file, { data, mtimeMs: stats.mtimeMs, size: stats.size });

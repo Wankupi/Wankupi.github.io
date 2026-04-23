@@ -8,15 +8,22 @@ const pageSize = 10;
 const router = useRouter();
 
 const current_page_num = ref<number>(1);
+const show_hidden = ref<boolean>(false);
 
-const totalPages = computed<number>(() => Math.max(1, Math.ceil(data.length / pageSize)));
+const filteredData = computed(() =>
+  show_hidden.value ? data : data.filter((page) => !page.hide)
+);
+
+const totalPages = computed<number>(() => Math.max(1, Math.ceil(filteredData.value.length / pageSize)));
 const pagedData = computed(() => {
   const start = (current_page_num.value - 1) * pageSize;
-  return data.slice(start, start + pageSize);
+  return filteredData.value.slice(start, start + pageSize);
 });
 
-const syncCurrentPageFromUrl = () => {
-  const pageParam = new URLSearchParams(window.location.search).get("page");
+const syncFromUrl = () => {
+  const params = new URLSearchParams(window.location.search);
+  show_hidden.value = params.has("show_hidden");
+  const pageParam = params.get("page");
   const parsedPage = Number(pageParam);
   if (!Number.isInteger(parsedPage)) {
     current_page_num.value = 1;
@@ -26,12 +33,12 @@ const syncCurrentPageFromUrl = () => {
 };
 
 onMounted(() => {
-  syncCurrentPageFromUrl();
-  window.addEventListener("popstate", syncCurrentPageFromUrl);
+  syncFromUrl();
+  window.addEventListener("popstate", syncFromUrl);
 });
 
 onBeforeUnmount(() => {
-  window.removeEventListener("popstate", syncCurrentPageFromUrl);
+  window.removeEventListener("popstate", syncFromUrl);
 });
 
 const goToPage = (page: number) => {
