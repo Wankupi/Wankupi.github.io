@@ -1,5 +1,6 @@
 ---
 layout: Academic
+titleTemplate: false
 github: Wankupi
 orcid: 0009-0007-3720-6319
 cv: cv.pdf
@@ -24,7 +25,7 @@ I also work with [Prof. Guoxing Chen](https://donnod.github.io/) at [NSEC Lab](h
 ## Publications
 
 <PublicationCard
-  title="The Interplay of Effective Model Checking and Secure Processor Design: From Insights to Practice"
+  title="Interplay of Efficient Model Checking and Secure Processor Design: A Case Study on Secure Speculation"
   venue="IEEE Security and Privacy 2026"
   status="accepted"
   code="https://zenodo.org/records/19270884"
