@@ -91,6 +91,10 @@ onBeforeUnmount(() => {
 .toc a {
   color: var(--text-color);
   text-decoration: none;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .toc a::before {
