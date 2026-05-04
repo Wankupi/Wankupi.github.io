@@ -1,15 +1,24 @@
+<script setup>
+import { useData } from "vitepress";
+import { computed } from "vue";
+
+const { theme } = useData();
+const author = computed(() => theme.value.author || "");
+const license = computed(() => theme.value.license || { name: "", url: "" });
+</script>
+
 <template>
   <footer>
-    <div>Copyright &copy; 2020~2026 Wankupi</div>
+    <div>Copyright &copy; 2020~2026 {{ author }}</div>
     <div>个人博客 | 我说我是乱写</div>
     <div>
       站内文章采用
       <a
-        href="https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode"
+        :href="license.url"
         target="_blank"
         rel="noopener noreferrer"
         class="license"
-        >CC BY-NC-SA 4.0 知识共享公共许可协议</a
+        >{{ license.name }}</a
       >
     </div>
   </footer>

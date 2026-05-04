@@ -15,6 +15,11 @@ export interface ContactItem {
   color?: string;
 }
 
+export interface LicenseInfo {
+  name: string;
+  url: string;
+}
+
 export interface ThemeConfig {
   nav: {
     brand: { text: string; link: string };
@@ -23,6 +28,8 @@ export interface ThemeConfig {
   themeColor?: string;
   background?: string;
   contacts?: ContactItem[];
+  author?: string;
+  license?: LicenseInfo;
 }
 
 export function use_math_converter(md: MarkdownIt) {

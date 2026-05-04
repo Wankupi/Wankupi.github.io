@@ -4,6 +4,7 @@ import { computed, defineAsyncComponent } from "vue";
 import NotFound from "@/layouts/NotFound.vue";
 import BlogBaseLayout from "@/layouts/BlogBaseLayout.vue";
 import SideNav from "@/components/SideNav.vue";
+import CopyrightInfo from "@/components/CopyrightInfo.vue";
 
 const { page, frontmatter } = useData();
 
@@ -32,6 +33,7 @@ let is_academic = computed(() => frontmatter.value.layout === "Academic");
         <SideNav>
           <template v-if="frontmatter.layout != 'ArticleList'" #bottom>
             <TableOfContent />
+            <CopyrightInfo />
           </template>
         </SideNav>
       </template>

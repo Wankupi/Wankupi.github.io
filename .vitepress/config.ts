@@ -77,6 +77,11 @@ export default defineConfigWithTheme<ThemeConfig>({
         { text: "Blog", link: "/blog", icon: "fa7-solid:blog" }
       ]
     },
+    author: "Wankupi",
+    license: {
+      name: "CC BY-NC-SA 4.0",
+      url: "https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode"
+    },
     contacts: [
       {
         icon: "mdi:email",
