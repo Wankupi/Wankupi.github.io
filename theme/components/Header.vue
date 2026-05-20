@@ -67,9 +67,14 @@ watch(() => route.path, closeMenu);
   z-index: 10;
   background-color: rgba(from var(--card-bg-color) r g b / 1);
   transition-duration: 0.4s;
-  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.5);
   padding: 0 1.25rem;
   gap: 1.25rem;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
+}
+@container scroll-state(scrollable: top) {
+  .top-panel {
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.5);
+  }
 }
 
 .brand {

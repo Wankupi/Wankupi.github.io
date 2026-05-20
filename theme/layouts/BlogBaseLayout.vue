@@ -62,6 +62,7 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: var(--top-panel-height);
   overflow-y: scroll;
+  container-type: scroll-state;
 }
 </style>
 
