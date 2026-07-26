@@ -17,12 +17,14 @@ const lastUpdated_str = computed(() =>
 </template>
 
 <style lang="scss" scoped>
+@import url("https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic");
+
 .academic-main {
   padding: 2rem;
   border-radius: var(--card-radius);
   background-color: var(--card-bg-color);
   box-shadow: 0 8px 22px color-mix(in srgb, var(--text-color) 12%, transparent);
-  font-family: var(--font-serif);
+  font-family: "Lato", var(--font-sans);
   font-size: 1.15rem;
   text-align: justify;
   white-space: normal;

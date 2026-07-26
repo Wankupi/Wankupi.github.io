@@ -7,20 +7,22 @@ cv: cv.pdf
 emails: ["kunpengwang@sjtu.edu.cn", "kunpengw@mit.edu"]
 photo: "507A5148-500.jpg"
 location:
-  - 'D19 SJTU'
+  # - 'D19 SJTU'
   # - '31-G786 MIT'
 ---
 
 # Kunpeng Wang | 王鲲鹏
 
-I am Kunpeng Wang, an undergraduate student in Computer Science from [ACM Class](https://acm.sjtu.edu.cn/), [Shanghai Jiao Tong University](https://sjtu.edu.cn/).
-I will graduate in Summer 2026 and join [MIT EECS](https://www.eecs.mit.edu/) as a Ph.D. student in Fall 2026, advised by [Prof. Mengjia Yan](https://people.csail.mit.edu/mengjia/).
+Hi, I am Kunpeng Wang, an incoming PhD student at [MIT EECS](https://www.eecs.mit.edu/) started from Fall 2026, advised by [Prof. Mengjia Yan](https://people.csail.mit.edu/mengjia/).
+If you are interested in my research, please feel free to contact me at [kunpengw@mit.edu](mailto:kunpengw@mit.edu).
 
+Prior to that, I got my Bachelor's degree in Computer Science from [ACM Class](https://acm.sjtu.edu.cn/), [Shanghai Jiao Tong University](https://sjtu.edu.cn/).
+I worked with [Prof. Guoxing Chen](https://donnod.github.io/) at [NSEC Lab](https://nsec.sjtu.edu.cn/) in SJTU.
+I was a research intern with [Prof. Mengjia Yan](https://people.csail.mit.edu/mengjia/) in MIT from May 2025 to Dec 2025.
+
+<!-- 
 I aim to expand the frontiers of verifiable security, building secure systems and developing more scalable verification methods.
-My long-term career goal is to become an independent researcher in computer security and formal verification, making innovative and impactful contributions to these fields.
-
-I worked with [Prof. Mengjia Yan](https://people.csail.mit.edu/mengjia/) as a research intern in MIT from May to Dec 2025.
-I also work with [Prof. Guoxing Chen](https://donnod.github.io/) at [NSEC Lab](https://nsec.sjtu.edu.cn/) in SJTU.
+My long-term career goal is to become an independent researcher in computer security and formal verification, making innovative and impactful contributions to these fields. -->
 
 ## Publications
 
@@ -28,6 +30,7 @@ I also work with [Prof. Guoxing Chen](https://donnod.github.io/) at [NSEC Lab](h
   title="Interplay of Efficient Model Checking and Secure Processor Design: A Case Study on Secure Speculation"
   venue="IEEE Security and Privacy 2026"
   status="accepted"
+  link="https://doi.org/10.1109/SP63933.2026.00203"
   code="https://zenodo.org/records/19270884"
 >
 
@@ -67,7 +70,7 @@ Tingzhen Dong*, <b>Kunpeng Wang*</b>, Yuheng Yang, Yu-Wei Fan, Qinhan Tan, Thoma
 
 ## Awards
 
-Some. Please check my CV for details.
+Some. Please check my [CV](cv.pdf) for details.
 
 ## Miscellaneous
 
