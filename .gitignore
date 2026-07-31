@@ -12,3 +12,4 @@ node_modules/
 components.d.ts
 .vscode/
 theme/data/.posts-cache.json
+*.tsbuildinfo

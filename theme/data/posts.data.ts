@@ -1,14 +1,12 @@
 import {
-  createContentLoader,
-  createMarkdownRenderer,
   defineLoader,
   type SiteConfig
 } from "vitepress";
 import fs from "fs-extra";
 import matter from "gray-matter";
 import path from "node:path";
-import { execFileSync } from "node:child_process";
 import { normalizePath } from "vite";
+import { loadPersistentCache, resolveTimes, savePersistentCache } from "../time-utils.ts";
 
 export interface Page {
   title: string;
@@ -28,117 +26,10 @@ type MemoryCacheEntry = {
   size: number;
 };
 
-type PersistentCacheEntry = {
-  createdAt: number;
-  lastCommitAt: number;
-  mtimeMs: number;
-  size: number;
-};
-
 const cache = new Map<string, MemoryCacheEntry>();
-const persistentCache = new Map<string, PersistentCacheEntry>();
-let persistentCacheLoaded = false;
-let persistentCacheDirty = false;
 
 const config: SiteConfig = (global as any).VITEPRESS_CONFIG;
 if (!config) throw "undefine global";
-
-const persistentCacheFile = path.resolve(config.srcDir, "../theme/data/.posts-cache.json");
-
-function loadPersistentCache(): void {
-  if (persistentCacheLoaded) return;
-  persistentCacheLoaded = true;
-  if (!fs.existsSync(persistentCacheFile)) return;
-  try {
-    const raw = fs.readJsonSync(persistentCacheFile) as Record<string, PersistentCacheEntry>;
-    for (const [key, value] of Object.entries(raw)) {
-      if (
-        value &&
-        Number.isFinite(value.createdAt) &&
-        Number.isFinite(value.lastCommitAt) &&
-        Number.isFinite(value.mtimeMs) &&
-        Number.isFinite(value.size)
-      ) {
-        persistentCache.set(key, value);
-      }
-    }
-  } catch {
-    // Ignore invalid cache content and rebuild on this run.
-  }
-}
-
-function savePersistentCache(): void {
-  if (!persistentCacheDirty) return;
-  fs.ensureDirSync(path.dirname(persistentCacheFile));
-  const serializable = Object.fromEntries(persistentCache.entries());
-  const tmpFile = `${persistentCacheFile}.tmp`;
-  fs.writeJsonSync(tmpFile, serializable, { spaces: 2 });
-  fs.moveSync(tmpFile, persistentCacheFile, { overwrite: true });
-  persistentCacheDirty = false;
-}
-
-function getFileCreatedFallback(stats: fs.Stats): number {
-  if (stats.birthtimeMs > 0) return stats.birthtimeMs;
-  if (stats.ctimeMs > 0) return stats.ctimeMs;
-  return stats.mtimeMs;
-}
-
-function runGitTimestamp(args: string[], cwd: string): number | null {
-  try {
-    const output = execFileSync("git", args, {
-      cwd,
-      encoding: "utf-8",
-      stdio: ["ignore", "pipe", "ignore"]
-    }).trim();
-    if (!output) return null;
-    const values = output
-      .split(/\r?\n/)
-      .map((line) => Number.parseInt(line.trim(), 10))
-      .filter((value) => Number.isFinite(value) && value > 0)
-      .map((seconds) => seconds * 1000);
-    if (values.length === 0) return null;
-    return Math.min(...values);
-  } catch {
-    return null;
-  }
-}
-
-function resolveTimes(file: string, stats: fs.Stats, cacheKey: string): {
-  createdAt: number;
-  lastCommitAt: number;
-} {
-  const cached = persistentCache.get(cacheKey);
-  if (cached && cached.mtimeMs === stats.mtimeMs && cached.size === stats.size) {
-    return { createdAt: cached.createdAt, lastCommitAt: cached.lastCommitAt };
-  }
-
-  const cwd = path.dirname(file);
-  const gitPath = path.basename(file);
-  const createdFallback = getFileCreatedFallback(stats);
-  const lastCommitFallback = stats.mtimeMs;
-
-  const firstCommitAt = runGitTimestamp(
-    ["log", "--diff-filter=A", "--follow", "--format=%ct", "--", gitPath],
-    cwd
-  );
-  const lastCommitAtRaw = runGitTimestamp(
-    ["log", "-1", "--format=%ct", "--", gitPath],
-    cwd
-  );
-
-  const createdAt = firstCommitAt ?? createdFallback;
-  const lastCommitAt = lastCommitAtRaw ?? lastCommitFallback;
-
-  persistentCache.set(cacheKey, {
-    createdAt,
-    lastCommitAt,
-    mtimeMs: stats.mtimeMs,
-    size: stats.size
-  });
-  persistentCacheDirty = true;
-
-  return { createdAt, lastCommitAt };
-}
 
 export default defineLoader({
   watch: normalizePath(path.resolve(config.srcDir, "Article/**/*.md")),

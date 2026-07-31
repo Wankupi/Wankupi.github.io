@@ -2,7 +2,7 @@ import { defineConfigWithTheme } from "vitepress";
 import { RssPlugin, type RSSOptions } from "vitepress-plugin-rss";
 import { viteStaticCopy } from "vite-plugin-static-copy";
 import tsconfigPaths from "vite-tsconfig-paths";
-import { type ThemeConfig, markdownConfig } from "theme-kupi/config";
+import { type ThemeConfig, markdownConfig, transformArticleTimes } from "theme-kupi/config";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -66,6 +66,7 @@ export default defineConfigWithTheme<ThemeConfig>({
   markdown: {
     ...markdownConfig
   },
+  transformPageData: transformArticleTimes,
   lang: "zh-CN",
   themeConfig: {
     background: "light-dark(#eeeeee, #292929)",

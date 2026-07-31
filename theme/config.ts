@@ -2,6 +2,8 @@ import { tex } from "@mdit/plugin-tex";
 import MarkdownIt from "markdown-it";
 import type { MarkdownOptions } from "vitepress";
 
+export { transformArticleTimes } from "./page-times.ts";
+
 export interface NavItem {
   text: string;
   link: string;
