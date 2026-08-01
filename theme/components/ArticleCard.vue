@@ -168,6 +168,17 @@ onMounted(async () => {
       display: block;
     }
 
+    /* Figure caption — the <em> that immediately follows an <img> */
+    img + em {
+      display: block;
+      text-align: center;
+      text-indent: 0;
+      margin-top: 0.4em;
+      font-size: 0.9em;
+      font-style: italic;
+      color: light-dark(#555, #999);
+    }
+
     a {
       color: var(--theme-color);
       text-decoration: underline;

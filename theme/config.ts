@@ -1,6 +1,7 @@
 import { tex } from "@mdit/plugin-tex";
 import MarkdownIt from "markdown-it";
 import type { MarkdownOptions } from "vitepress";
+import { imageFigurePlugin } from "./markdown-image.ts";
 
 export { transformArticleTimes } from "./page-times.ts";
 
@@ -56,6 +57,7 @@ export let markdownConfig: MarkdownOptions = {
   config(md) {
     md.set({ highlight: null });
     use_math_converter(md);
+    imageFigurePlugin(md);
   },
   anchor: {
     permalink(slug, opts, state, index) {
