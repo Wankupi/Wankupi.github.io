@@ -1,5 +1,6 @@
 import { useData } from "vitepress";
+import type { Ref } from "vue";
 
-export function usePageFrontmatter<T>(): T {
-  return useData().frontmatter as any as T;
+export function usePageFrontmatter<T>(): Ref<T> {
+  return useData().frontmatter as any as Ref<T>;
 }

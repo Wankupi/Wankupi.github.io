@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useData } from "vitepress";
 import { computed } from "vue";
+import ProfileHeader from "@/components/Academic/ProfileHeader.vue";
 
 const data = useData();
 const lastUpdated = computed(() => data.page.value.lastUpdated);
@@ -11,7 +12,12 @@ const lastUpdated_str = computed(() =>
 
 <template>
   <div class="academic-main">
-    <Content />
+    <!-- Portrait only: the sidebar is a drawer there, so the photo, the name
+         and the contacts belong on the page itself, not behind a button -->
+    <ProfileHeader class="profile" />
+    <div class="content">
+      <Content />
+    </div>
     <div class="gray" v-if="lastUpdated">Last Updated on {{ lastUpdated_str }}</div>
   </div>
 </template>
@@ -41,6 +47,10 @@ const lastUpdated_str = computed(() =>
   margin-top: 1.4rem;
 }
 
+.profile {
+  display: none;
+}
+
 /* Portrait: <main> drops its padding, so the body fills the screen width */
 @media (orientation: portrait) {
   .academic-main {
@@ -48,6 +58,17 @@ const lastUpdated_str = computed(() =>
     box-shadow: none;
     border-radius: 0;
     text-align: start;
+  }
+
+  .profile {
+    display: flex;
+    margin-bottom: 1.25rem;
+  }
+
+  /* The name lives in the profile header now, so the title of the content
+     would only repeat it */
+  .content :deep(h1) {
+    display: none;
   }
 }
 

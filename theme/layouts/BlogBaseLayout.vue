@@ -43,7 +43,7 @@ watch(
 </script>
 
 <template>
-  <div class="rt-layout bg" :class="color_mode_class" :style="layoutStyle">
+  <div class="rt-layout bg" :class="[color_mode_class, { academic: is_academic }]" :style="layoutStyle">
     <Header></Header>
     <main class="max-width-30cm" :class="{ 'full-bleed': full_bleed }">
       <article>
@@ -246,6 +246,14 @@ nav {
   .side-backdrop.open {
     opacity: 1;
     visibility: visible;
+  }
+
+  /* The academic page shows the sidebar content inline in portrait mode,
+     so there is nothing left for the drawer to hold */
+  .rt-layout.academic nav,
+  .rt-layout.academic .side-backdrop,
+  .rt-layout.academic .side-toggle {
+    display: none;
   }
 
   .side-toggle {
