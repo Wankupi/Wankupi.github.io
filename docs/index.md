@@ -7,17 +7,17 @@ cv: cv.pdf
 emails: ["kunpengwang@sjtu.edu.cn", "kunpengw@mit.edu"]
 photo: "507A5148-500.jpg"
 location:
+  - '31-G786 MIT'
   # - 'D19 SJTU'
-  # - '31-G786 MIT'
 ---
 
 # Kunpeng Wang | 王鲲鹏
 
-Hi, I am Kunpeng Wang, an incoming PhD student at [MIT EECS](https://www.eecs.mit.edu/) started from Fall 2026, advised by [Prof. Mengjia Yan](https://people.csail.mit.edu/mengjia/).
+Hi, I am Kunpeng Wang, a PhD student at MIT EECS since 2026 Fall, advised by [Prof. Mengjia Yan](https://people.csail.mit.edu/mengjia/).
 If you are interested in my research, please feel free to contact me at [kunpengw@mit.edu](mailto:kunpengw@mit.edu).
 
-Prior to that, I got my Bachelor's degree in Computer Science from [ACM Class](https://acm.sjtu.edu.cn/), [Shanghai Jiao Tong University](https://sjtu.edu.cn/).
-I worked with [Prof. Guoxing Chen](https://donnod.github.io/) at [NSEC Lab](https://nsec.sjtu.edu.cn/) in SJTU.
+Prior to that, I got my Bachelor's degree in Computer Science from ACM Class, Shanghai Jiao Tong University.
+I worked with [Prof. Guoxing Chen](https://donnod.github.io/) at NSEC Lab in SJTU.
 I was a research intern with [Prof. Mengjia Yan](https://people.csail.mit.edu/mengjia/) in MIT from May 2025 to Dec 2025.
 
 <!-- 
@@ -42,29 +42,21 @@ Tingzhen Dong*, <b>Kunpeng Wang*</b>, Yuheng Yang, Yu-Wei Fan, Qinhan Tan, Thoma
 
 ## Research Experience
 
-<EduCard title="Massachusetts Institute of Technology" time="Start on Sep. 2026" description="Ph.D. in EECS" status="planned" :tags="['PhD', 'EECS']" link="https://www.eecs.mit.edu/">
+<EduCard title="Massachusetts Institute of Technology" time="Sep. 2026 ~ Present" description="Ph.D. in EECS" :tags="['PhD', 'EECS']">
 
-- Advise by [**Prof. Mengjia Yan**](https://people.csail.mit.edu/mengjia/)
-
-</EduCard>
-
-<EduCard title="Matcha Lab, MIT" time="May. 2025 ~ Dec. 2025" description="Research Intern" icon="material-symbols:home-work" status="completed" :tags="['Hardware Security', 'Verification']" link="https://people.csail.mit.edu/mengjia/">
-
-- Advised by [**Prof. Mengjia Yan**](https://people.csail.mit.edu/mengjia/)
-- Research Topic: secure (out-of-order) processor design and verification.
+Advised by [**Prof. Mengjia Yan**](https://people.csail.mit.edu/mengjia/).
 
 </EduCard>
 
-<EduCard title="NSEC Lab, SJTU" time="June. 2024 ~ June. 2026" description="Student Researcher" icon="material-symbols:home-work" status="ongoing" :tags="['TEE', 'Side-Channel']" link="https://nsec.sjtu.edu.cn/">
+<EduCard title="Matcha Lab, MIT" time="May. 2025 ~ Dec. 2025" description="Research Intern" icon="material-symbols:home-work" :tags="['Hardware Security', 'Verification']">
 
-- Advised by [**Prof. Guoxing Chen**](https://donnod.github.io/)
-- Research Topic: verifiable interrupt-based side-channel mitigation for trusted execution environment.
+Advised by [**Prof. Mengjia Yan**](https://people.csail.mit.edu/mengjia/) on secure (out-of-order) processor design and verification.
 
 </EduCard>
 
-<EduCard title="Shanghai Jiao Tong University" time="2022 ~ 2026" description="B.Eng. in Computer Science and Technology" status="ongoing" :tags="['ACM Class', 'Zhiyuan College']" link="https://sjtu.edu.cn/">
+<EduCard title="NSEC Lab, SJTU" time="June. 2024 ~ June. 2026" description="Student Researcher" icon="material-symbols:home-work" :tags="['TEE', 'Side-Channel']">
 
-- Student of [**ACM Class**](https://acm.sjtu.edu.cn/), [**Zhiyuan College**](https://en.zhiyuan.sjtu.edu.cn/)
+Advised by [**Prof. Guoxing Chen**](https://donnod.github.io/) on verifiable interrupt-based side-channel mitigation for trusted execution environments.
 
 </EduCard>
 
