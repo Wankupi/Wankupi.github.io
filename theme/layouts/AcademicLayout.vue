@@ -41,9 +41,12 @@ const lastUpdated_str = computed(() =>
   margin-top: 1.4rem;
 }
 
+/* Portrait: <main> drops its padding, so the body fills the screen width */
 @media (orientation: portrait) {
   .academic-main {
     padding: 1rem;
+    box-shadow: none;
+    border-radius: 0;
     text-align: start;
   }
 }

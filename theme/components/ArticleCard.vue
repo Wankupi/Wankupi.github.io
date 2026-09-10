@@ -100,9 +100,12 @@ onMounted(async () => {
   border-radius: var(--card-radius);
 }
 
+/* Portrait: <main> drops its padding, so the card fills the screen width */
 @media (orientation: portrait) {
   .card {
     padding: 1em;
+    box-shadow: none;
+    border-radius: 0;
   }
 }
 
