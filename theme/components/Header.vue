@@ -151,14 +151,18 @@ watch(() => route.path, closeMenu);
   .nav-items {
     display: none;
     position: fixed;
-    top: var(--top-panel-height);
-    left: 0;
-    right: 0;
+    top: calc(var(--top-panel-height) + 0.5rem);
+    right: 1.25rem;
+    left: auto;
     flex-direction: column;
-    gap: 0;
+    align-items: stretch;
+    gap: 0.125rem;
+    min-width: 10rem;
+    max-width: calc(100vw - 2.5rem);
     background-color: rgba(from var(--card-bg-color) r g b / 1);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    padding: 0.5rem 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border-radius: var(--card-radius);
+    padding: 0.375rem;
   }
 
   .nav-items.open {
@@ -167,15 +171,15 @@ watch(() => route.path, closeMenu);
 
   .nav-items > a {
     width: 100%;
-    padding: 0.75em 1.5em;
-    border-radius: 0;
+    padding: 0.75em 1em;
+    border-radius: 0.375em;
     gap: 0.75em;
   }
 
   .nav-items > .mode-toggle {
     width: 100%;
-    padding: 0.75em 1.5em;
-    border-radius: 0;
+    padding: 0.75em 1em;
+    border-radius: 0.375em;
     justify-content: flex-start;
   }
 }
