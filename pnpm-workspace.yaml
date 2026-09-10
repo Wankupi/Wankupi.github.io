@@ -1,2 +1,13 @@
 packages:
   - "theme"
+
+allowBuilds:
+  '@parcel/watcher': false
+  esbuild: false
+  sharp: false
+
+minimumReleaseAgeExclude:
+  - vite@8.3.0
+
+overrides:
+  theme-kupi: "link:./theme"

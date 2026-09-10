@@ -12,23 +12,15 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@mdit/plugin-tex": "^0.22.1",
+    "@mdit/plugin-tex": "^1.1.1",
     "@types/fs-extra": "^11.0.4",
-    "@types/markdown-it": "^14.1.2",
-    "@vue/tsconfig": "^0.8.1",
-    "markdown-it": "^14.1.0",
+    "@vue/tsconfig": "^0.9.1",
+    "markdown-it": "^15.0.1",
     "theme-kupi": "link:theme",
-    "vite-tsconfig-paths": "^5.1.4",
-    "typescript": "^5.9.2",
-    "vite-plugin-static-copy": "^3.1.3",
-    "vitepress": "^1.6.4",
-    "vitepress-plugin-rss": "^0.3.2",
-    "vue": "^3.5.22",
-    "vue-router": "^4.5.1"
-  },
-  "pnpm": {
-    "overrides": {
-      "theme-kupi": "link:./theme"
-    }
+    "typescript": "^7.0.2",
+    "vite-plugin-static-copy": "^4.1.1",
+    "vitepress": "^2.0.0-alpha.20",
+    "vitepress-plugin-rss": "^0.4.4",
+    "vue": "^3.5.42"
   }
 }

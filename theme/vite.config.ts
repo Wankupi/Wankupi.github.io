@@ -7,13 +7,13 @@ export default defineConfig({
   plugins: [vue(), libInjectCss()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, ".")
+      "@": path.resolve(import.meta.dirname, ".")
     }
   },
   build: {
     cssCodeSplit: true,
     lib: {
-      entry: path.resolve(__dirname, "main.ts"),
+      entry: path.resolve(import.meta.dirname, "main.ts"),
       formats: ["es"],
       fileName: () => "main.js"
     },

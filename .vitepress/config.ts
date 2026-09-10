@@ -1,13 +1,7 @@
-import { defineConfigWithTheme } from "vitepress";
+import { defineConfig } from "vitepress";
 import { RssPlugin, type RSSOptions } from "vitepress-plugin-rss";
 import { viteStaticCopy } from "vite-plugin-static-copy";
-import tsconfigPaths from "vite-tsconfig-paths";
 import { type ThemeConfig, markdownConfig, transformArticleTimes } from "theme-kupi/config";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const workspaceRoot = path.resolve(__dirname, "..");
 
 const hostname = process.env["HOSTNAME"] || "https://www.wankupi.top";
 const baseUrl = process.env["BASE_URL"] || "/";
@@ -29,7 +23,7 @@ const rssOptions: RSSOptions = {
 };
 
 // https://vitepress.dev/reference/site-config
-export default defineConfigWithTheme<ThemeConfig>({
+export default defineConfig<ThemeConfig>({
   title: title,
   description: "Wankupi's academic page and blogs.",
   base: baseUrl,
@@ -41,25 +35,19 @@ export default defineConfigWithTheme<ThemeConfig>({
   ignoreDeadLinks: true,
   head: [["link", { rel: "icon", href: `${baseUrl}favicon.ico` }]],
   vite: {
+    resolve: {
+      tsconfigPaths: true
+    },
     plugins: [
-      tsconfigPaths({
-        projects: [
-          path.resolve(workspaceRoot, "tsconfig.json"),
-          path.resolve(workspaceRoot, "theme/tsconfig.json")
-        ],
-        ignoreConfigErrors: true,
-        loose: true
-      }),
       RssPlugin(rssOptions),
       viteStaticCopy({
         targets: [
           {
-            src: ["**/*.*", "!**/*.md", "!**/.git/**", "!public/**"],
+            src: ["**/*.*", "!**/*.md", "!**/.*", "!**/.*/**", "!public/**"],
             dest: "",
-            overwrite: "error"
+            overwrite: "error",
           }
         ],
-        structured: true
       })
     ]
   },
