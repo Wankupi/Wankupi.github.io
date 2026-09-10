@@ -1,63 +1,36 @@
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
-import { computed } from "vue";
 
-type CardStatus = "ongoing" | "completed" | "planned";
-
-const props = defineProps<{
+defineProps<{
   title: string;
   time: string;
   description?: string;
   icon?: string;
-  status?: CardStatus;
   tags?: string[];
   link?: string;
   variant?: "default" | "compact";
 }>();
-
-const statusText = computed(() => {
-  if (!props.status) {
-    return null;
-  }
-
-  return (
-    {
-      ongoing: "Ongoing",
-      completed: "Completed",
-      planned: "Planned"
-    } as const
-  )[props.status];
-});
 </script>
 
 <template>
   <article class="show-card" :class="[variant || 'default']">
-    <div class="main-info">
-      <div class="icon-wrap">
-        <Icon :icon="icon || 'material-symbols:school'" width="1.25em"></Icon>
+    <header class="info-header">
+      <div class="title-row">
+        <Icon class="title-icon" :icon="icon || 'material-symbols:school'" width="1.1em"></Icon>
+        <h3 class="title">
+          <a v-if="link" :href="link" target="_blank" rel="noopener noreferrer">{{ title }}</a>
+          <template v-else>{{ title }}</template>
+        </h3>
+        <span class="time">{{ time }}</span>
       </div>
+    </header>
 
-      <div class="content-wrap">
-        <header class="info-header">
-          <div class="title-row">
-            <h3 class="title">
-              <a v-if="link" :href="link" target="_blank" rel="noopener noreferrer">{{ title }}</a>
-              <template v-else>{{ title }}</template>
-            </h3>
-            <span v-if="statusText" class="status" :class="status">{{ statusText }}</span>
-            <span class="time">{{ time }}</span>
-          </div>
-        </header>
+    <p v-if="description" class="description">{{ description }}</p>
 
-        <p v-if="description" class="description">{{ description }}</p>
+    <div class="details"><slot></slot></div>
 
-        <div class="details"><slot></slot></div>
-
-        <div v-if="tags?.length" class="tags">
-          <span v-for="tag in tags" :key="tag" class="tag">{{ tag }}</span>
-        </div>
-
-      </div>
+    <div v-if="tags?.length" class="tags">
+      <span v-for="tag in tags" :key="tag" class="tag">{{ tag }}</span>
     </div>
   </article>
 </template>
@@ -85,29 +58,8 @@ const statusText = computed(() => {
   padding: 0.65rem 0.8rem;
 }
 
-.main-info {
-  display: grid;
-  grid-template-columns: 2rem 1fr;
-  gap: 0.7rem;
-  align-items: start;
-}
-
-.icon-wrap {
-  width: 2rem;
-  height: 2rem;
-  display: grid;
-  place-items: center;
-  color: var(--theme-color);
-  background-color: color-mix(in srgb, var(--theme-color) 16%, var(--card-bg-color));
-  border-radius: 0.65rem;
-}
-
-.content-wrap {
-  min-width: 0;
-}
-
 .info-header {
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.15rem;
 }
 
 .title-row {
@@ -115,6 +67,11 @@ const statusText = computed(() => {
   align-items: center;
   gap: 0.4rem;
   flex-wrap: wrap;
+}
+
+.title-icon {
+  flex: none;
+  color: var(--theme-color);
 }
 
 .title {
@@ -148,47 +105,14 @@ const statusText = computed(() => {
   color: color-mix(in srgb, var(--text-color) 78%, transparent);
 }
 
-.status {
-  padding: 0.15rem 0.52rem;
-  border-radius: 999px;
-  font-size: 0.74rem;
-  line-height: 1.25;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  border: 1px solid transparent;
-}
-
-.status.ongoing {
-  color: var(--theme-color);
-  background-color: color-mix(in srgb, var(--theme-color) 14%, var(--card-bg-color));
-  border-color: color-mix(in srgb, var(--theme-color) 30%, transparent);
-}
-
-.status.completed {
-  color: color-mix(in srgb, var(--theme-color) 72%, var(--text-color));
-  background-color: color-mix(in srgb, var(--theme-color) 12%, var(--card-bg-color));
-  border-color: color-mix(in srgb, var(--theme-color) 25%, transparent);
-}
-
-.status.planned {
-  color: color-mix(in srgb, var(--text-color) 86%, var(--theme-color));
-  background-color: color-mix(in srgb, var(--theme-color) 10%, var(--card-bg-color));
-  border-color: color-mix(in srgb, var(--theme-color) 22%, transparent);
-}
-
 .details {
-  margin-top: 0.25rem;
+  margin-top: 0.15rem;
   font-size: 0.9rem;
+  color: color-mix(in srgb, var(--text-color) 78%, transparent);
 }
 
-.details :deep(ul),
-.details :deep(ol) {
-  margin: 0.3rem 0 0;
-  padding-left: 1rem;
-}
-
-.details :deep(li) {
-  margin: 0.1rem 0;
+.details :deep(p) {
+  margin: 0;
 }
 
 .tags {
@@ -211,16 +135,6 @@ const statusText = computed(() => {
   .show-card {
     padding: 0.65rem 0.75rem;
     margin: 0.15rem 0 0.45rem;
-  }
-
-  .main-info {
-    grid-template-columns: 1fr;
-    gap: 0.4rem;
-  }
-
-  .icon-wrap {
-    width: 1.75rem;
-    height: 1.75rem;
   }
 }
 </style>

@@ -87,6 +87,21 @@ const lastUpdated_str = computed(() =>
     line-height: 1.5;
   }
 
+  h1 {
+    margin-bottom: 1.5rem;
+  }
+
+  h2 {
+    margin-top: 2.25rem;
+    margin-bottom: 1rem;
+  }
+
+  h3,
+  h4 {
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+
   a {
     text-decoration: none;
     color: var(--theme-color);
