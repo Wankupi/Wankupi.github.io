@@ -10,9 +10,9 @@ const license = computed(() => theme.value.license || { name: "", url: "" });
 <template>
   <footer>
     <div>Copyright &copy; 2020~2026 {{ author }}</div>
-    <div>个人博客 | 我说我是乱写</div>
+    <div>个人博客 | Personal Website</div>
     <div>
-      站内文章采用
+      文章许可 | License:
       <a
         :href="license.url"
         target="_blank"

@@ -14,6 +14,10 @@ const theme: Theme = {
       defineAsyncComponent(() => import("@/components/Academic/PublicationCard.vue"))
     );
     app.component(
+      "IconLink",
+      defineAsyncComponent(() => import("@/components/Academic/IconLink.vue"))
+    );
+    app.component(
       "Tags",
       defineAsyncComponent(() => import("@/components/Academic/Tags.vue"))
     );

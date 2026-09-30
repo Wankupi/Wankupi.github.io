@@ -1,89 +1,63 @@
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
 
-const props = defineProps<{
+defineProps<{
   title: string;
   authors?: string;
   venue: string;
   link?: string;
   code?: string;
-  status?: "published" | "accepted" | "under-review";
 }>();
-
-const statusText: Record<NonNullable<typeof props.status>, string> = {
-  published: "Published",
-  accepted: "Accepted",
-  "under-review": "Under Review"
-};
 </script>
 
 <template>
-  <article class="pub-card">
-    <header class="info-header">
-      <div class="title-row">
-        <Icon class="title-icon" icon="material-symbols:article-rounded" width="1.1em"></Icon>
-        <h3 class="title">
-          <a v-if="link" :href="link" target="_blank" rel="noopener noreferrer">{{ title }}</a>
-          <template v-else>{{ title }}</template>
-        </h3>
+  <div class="pub-item">
+    <Icon class="bullet" icon="material-symbols:article-rounded" width="1.05em"></Icon>
+    <div class="body">
+      <div class="title">
+        <a v-if="link" :href="link" target="_blank" rel="noopener noreferrer">{{ title }}</a>
+        <template v-else>{{ title }}</template>
       </div>
-      <p class="venue">
-        {{ venue }}<template v-if="status"> · {{ statusText[status] }}</template>
-      </p>
-    </header>
-
-    <p v-if="$slots.authors || authors" class="authors">
-      <slot name="authors">{{ authors }}</slot>
-    </p>
-
-    <div class="actions" v-if="link || code">
-      <a v-if="link" :href="link" target="_blank" rel="noopener noreferrer">Paper</a>
-      <a v-if="code" :href="code" target="_blank" rel="noopener noreferrer">Code</a>
+      <div v-if="$slots.authors || authors" class="authors">
+        <slot name="authors">{{ authors }}</slot>
+      </div>
+      <div class="meta">
+        <span class="venue">{{ venue }}</span>
+        <span v-if="link || code" class="actions">
+          <a v-if="link" :href="link" target="_blank" rel="noopener noreferrer">[Paper]</a>
+          <a v-if="code" :href="code" target="_blank" rel="noopener noreferrer">[Code]</a>
+        </span>
+      </div>
+      <div v-if="$slots.default" class="details"><slot></slot></div>
     </div>
-
-    <div class="details"><slot></slot></div>
-  </article>
+  </div>
 </template>
 
 <style scoped>
-.pub-card {
-  padding: 0.7rem 0.9rem;
-  margin: 0.25rem 0 0.55rem;
-  border: 1px solid color-mix(in srgb, var(--theme-color) 10%, transparent);
-  border-radius: 0.9rem;
-  background: var(--card-bg-color);
-  box-shadow: 0 2px 8px color-mix(in srgb, var(--text-color) 6%, transparent);
-  transition:
-    box-shadow 0.2s ease,
-    border-color 0.2s ease;
-}
-
-.pub-card:hover {
-  box-shadow: 0 4px 12px color-mix(in srgb, var(--text-color) 10%, transparent);
-  border-color: color-mix(in srgb, var(--theme-color) 22%, transparent);
-}
-
-.info-header {
-  margin-bottom: 0.15rem;
-}
-
-.title-row {
+.pub-item {
   display: flex;
-  align-items: center;
-  gap: 0.4rem;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin: 0.2rem 0 0.75rem;
+  line-height: 1.5;
 }
 
-.title-icon {
+.bullet {
   flex: none;
+  /* align with the first line of the title */
+  margin-top: 0.22em;
   color: var(--theme-color);
 }
 
+.body {
+  flex: 1;
+  min-width: 0;
+}
+
 .title {
-  margin: 0;
-  line-height: 1.3;
-  font-size: 1.05rem;
-  font-weight: 700;
   font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 600;
   color: var(--text-title-color);
 }
 
@@ -96,24 +70,32 @@ const statusText: Record<NonNullable<typeof props.status>, string> = {
   color: var(--theme-color);
 }
 
-.venue {
-  margin: 0.15rem 0 0;
-  font-size: 0.84rem;
-  color: color-mix(in srgb, var(--text-color) 66%, transparent);
-}
-
 .authors {
-  margin: 0.15rem 0 0;
-  line-height: 1.5;
   font-size: 0.92rem;
   color: color-mix(in srgb, var(--text-color) 86%, transparent);
 }
 
-.actions {
-  margin-top: 0.3rem;
+.authors :deep(p) {
+  margin: 0;
+}
+
+.meta {
   display: flex;
-  gap: 0.55rem;
-  font-size: 0.82rem;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 0.4rem;
+  font-size: 0.92rem;
+}
+
+.venue {
+  font-style: italic;
+  color: color-mix(in srgb, var(--text-color) 85%, transparent);
+}
+
+.actions {
+  display: inline-flex;
+  gap: 0.35rem;
+  margin-left: 0.2rem;
 }
 
 .actions a {
@@ -126,13 +108,11 @@ const statusText: Record<NonNullable<typeof props.status>, string> = {
 }
 
 .details {
-  margin-top: 0.15rem;
+  font-size: 0.92rem;
+  color: color-mix(in srgb, var(--text-color) 78%, transparent);
 }
 
-@media (orientation: portrait) {
-  .pub-card {
-    padding: 0.6rem 0.7rem;
-    margin: 0.15rem 0 0.45rem;
-  }
+.details :deep(p) {
+  margin: 0;
 }
 </style>

@@ -23,9 +23,11 @@ const lastUpdated_str = computed(() =>
 </template>
 
 <style lang="scss" scoped>
-@import url("https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic");
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&family=Source+Serif+4:wght@400;600;700&display=swap");
 
 .academic-main {
+  /* Headings and entry titles; Lato stays the body face */
+  --font-serif: "Source Serif 4", "Noto Serif SC", "Source Han Serif SC", Georgia, serif;
   padding: 2rem;
   border-radius: var(--card-radius);
   background-color: var(--card-bg-color);

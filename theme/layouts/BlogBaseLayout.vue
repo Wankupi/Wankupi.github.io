@@ -76,9 +76,9 @@ watch(
   --footer-height: 8rem;
   --item-gap: 1rem;
   --card-radius: 0.3rem;
-  --font-serif: "serif";
-  --font-mono: "monospace";
-  --font-sans: "sans-serif";
+  --font-serif: serif;
+  --font-mono: monospace;
+  --font-sans: sans-serif;
 }
 
 html {
