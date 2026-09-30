@@ -5,10 +5,9 @@ github: Wankupi
 orcid: 0009-0007-3720-6319
 cv: cv.pdf
 emails: ["kunpengwang@sjtu.edu.cn", "kunpengw@mit.edu"]
-photo: "507A5148-500.jpg"
+photo: "507A5360.jpg"
 location:
   - '31-G786 MIT'
-  # - 'D19 SJTU'
 ---
 
 # Kunpeng Wang | 王鲲鹏
