@@ -97,6 +97,11 @@ html {
   /* Below would be overridden by inline CSS */
   --layout-bg: light-dark(#eee, #292929);
   --theme-color: skyblue;
+  /* Search hits: exact / prefix matches vs typo-tolerant (fuzzy) matches */
+  --hit-exact-bg: light-dark(#ffe98a, #6e5a00);
+  --hit-fuzzy-bg: light-dark(#e6d6ff, #4a3570);
+  --hit-fuzzy-line: light-dark(#8a5cf5, #b99bff);
+  --hit-current-bg: light-dark(#ffb347, #b36200);
 }
 
 .rt-layout {

@@ -2,10 +2,12 @@
   <div class="card" id="article">
     <Content />
   </div>
+  <SearchHighlight />
   <!-- <div class="card" id="Comment"></div> -->
 </template>
 
 <script setup lang="ts">
+import SearchHighlight from "@/components/SearchHighlight.vue";
 import { nextTick, onMounted } from "vue";
 
 const loadMathJax = () => {

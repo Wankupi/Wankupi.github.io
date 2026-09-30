@@ -18,7 +18,7 @@ export default defineConfig({
       fileName: () => "main.js"
     },
     rollupOptions: {
-      external: ["vue", "vitepress", "@iconify/vue", "#posts-data"]
+      external: ["vue", "vitepress", "@iconify/vue", "#posts-data", "@localSearchIndex", "minisearch"]
     }
   }
 });

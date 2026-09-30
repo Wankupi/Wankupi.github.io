@@ -1,10 +1,16 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import { Icon } from "@iconify/vue";
 import { toggleColorMode, colorMode } from "@/client/color-mode";
 import { withBase, useData, useRouter } from "vitepress";
+import HeaderSearch from "@/components/HeaderSearch.vue";
 
-const { theme } = useData();
+const { theme, frontmatter } = useData();
+
+// Search lives on the home and list pages, not on individual articles.
+const showSearch = computed(
+  () => !!theme.value.search && ["Academic", "ArticleList"].includes(frontmatter.value.layout)
+);
 const { route } = useRouter();
 
 const menuOpen = ref(false);
@@ -32,6 +38,7 @@ watch(() => route.path, closeMenu);
         <span>{{ item.text }}</span>
       </a>
     </div>
+    <HeaderSearch v-if="showSearch"></HeaderSearch>
     <button
       class="hamburger"
       type="button"

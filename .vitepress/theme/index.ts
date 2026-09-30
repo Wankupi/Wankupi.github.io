@@ -1,2 +1,4 @@
-import theme from "theme-kupi"
-export default theme;
+import { createTheme } from "theme-kupi";
+import { miniSearch } from "../search.ts";
+
+export default createTheme({ miniSearch });

@@ -1,7 +1,8 @@
 import { defineConfig } from "vitepress";
 import { RssPlugin, type RSSOptions } from "vitepress-plugin-rss";
 import { viteStaticCopy } from "vite-plugin-static-copy";
-import { type ThemeConfig, markdownConfig, transformArticleTimes } from "theme-kupi/config";
+import { type ThemeConfig, markdownConfig, splitIntoSections, transformArticleTimes } from "theme-kupi/config";
+import { miniSearch } from "./search.ts";
 
 const hostname = process.env["HOSTNAME"] || "https://www.wankupi.top";
 const baseUrl = process.env["BASE_URL"] || "/";
@@ -59,6 +60,16 @@ export default defineConfig<ThemeConfig>({
   themeConfig: {
     background: "light-dark(#eeeeee, #292929)",
     themeColor: "#1772d0",
+    search: {
+      provider: "local",
+      page: "/blog",
+      options: {
+        miniSearch: { ...miniSearch, _splitIntoSections: splitIntoSections },
+        // Only articles are indexed.
+        _render: (src, env, md) =>
+          env.relativePath.startsWith("Article/") ? md.renderAsync(src, env) : ""
+      }
+    },
     nav: {
       brand: { text: "Wankupi's Website", link: "/" },
       items: [
