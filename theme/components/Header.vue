@@ -7,9 +7,9 @@ import HeaderSearch from "@/components/HeaderSearch.vue";
 
 const { theme, frontmatter } = useData();
 
-// Search lives on the home and list pages, not on individual articles.
+// Search lives only on the article list page.
 const showSearch = computed(
-  () => !!theme.value.search && ["Academic", "ArticleList"].includes(frontmatter.value.layout)
+  () => !!theme.value.search && frontmatter.value.layout === "ArticleList"
 );
 const { route } = useRouter();
 

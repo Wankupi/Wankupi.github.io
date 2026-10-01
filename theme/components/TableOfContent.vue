@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onContentUpdated } from "vitepress";
 import SideCard from "./SideCard.vue";
-import { ref, computed, watch, onMounted, onBeforeUnmount, nextTick } from "vue";
+import { ref, watch, onMounted, onBeforeUnmount, nextTick } from "vue";
 
 interface HeaderItem {
   id: string;
@@ -9,36 +9,11 @@ interface HeaderItem {
   level: number;
 }
 
-interface HeaderNode extends HeaderItem {
-  children: HeaderNode[];
-}
-
 const headers = ref<HeaderItem[]>([]);
 const activeId = ref<string>("");
 const navRef = ref<HTMLElement | null>(null);
 let observer: IntersectionObserver | null = null;
 const visible = new Map<string, boolean>();
-
-function buildTree(flat: HeaderItem[]): HeaderNode[] {
-  const roots: HeaderNode[] = [];
-  const stack: HeaderNode[] = [];
-
-  for (const h of flat) {
-    const node: HeaderNode = { ...h, children: [] };
-    while (stack.length > 0 && stack[stack.length - 1]!.level >= h.level) {
-      stack.pop();
-    }
-    if (stack.length === 0) {
-      roots.push(node);
-    } else {
-      stack[stack.length - 1]!.children.push(node);
-    }
-    stack.push(node);
-  }
-  return roots;
-}
-
-const tree = computed(() => buildTree(headers.value));
 
 function pickActive() {
   const first = headers.value.find((h) => visible.get(h.id));
@@ -88,7 +63,7 @@ function updateTOC() {
     headers.value = [];
     return;
   }
-  const nodes = Array.from(root.querySelectorAll("h2, h3, h4"));
+  const nodes = Array.from(root.querySelectorAll("h1, h2, h3, h4"));
   headers.value = nodes
     .map((el) => {
       const id = (el as HTMLElement).id || "";
@@ -113,32 +88,13 @@ onBeforeUnmount(() => {
 <template>
   <SideCard>
     <h3>目录 TOC</h3>
-    <nav v-if="tree.length" ref="navRef" class="toc">
+    <nav v-if="headers.length" ref="navRef" class="toc">
       <ul>
-        <template v-for="root in tree" :key="root.id">
-          <li :class="`level-${root.level}`">
-            <a :href="`#${root.id}`" :class="{ active: root.id === activeId }">{{ root.text }}</a>
-          </li>
-          <template v-for="child in root.children" :key="child.id">
-            <li :class="`level-${child.level}`">
-              <a :href="`#${child.id}`" :class="{ active: child.id === activeId }">
-                {{ child.text }}
-              </a>
-            </li>
-            <li
-              v-for="grandchild in child.children"
-              :key="grandchild.id"
-              :class="`level-${grandchild.level}`"
-            >
-              <a
-                :href="`#${grandchild.id}`"
-                :class="{ active: grandchild.id === activeId }"
-              >
-                {{ grandchild.text }}
-              </a>
-            </li>
-          </template>
-        </template>
+        <li v-for="h in headers" :key="h.id" :class="`level-${h.level}`">
+          <a :href="`#${h.id}`" :title="h.text" :class="{ active: h.id === activeId }">
+            {{ h.text }}
+          </a>
+        </li>
       </ul>
     </nav>
     <div v-else class="toc-empty">暂无目录</div>
@@ -189,6 +145,15 @@ onBeforeUnmount(() => {
 }
 .toc {
   --indent: 0.5em;
+}
+/* h1 titles are usually long: allow two lines before truncating */
+.level-1 a {
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow-wrap: anywhere;
 }
 .level-2 {
   padding-left: var(--indent);
